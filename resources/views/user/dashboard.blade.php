@@ -1,0 +1,43 @@
+@extends('templates.master')
+
+@section('conteudo-view')
+
+    @if(session('success'))
+        <h3>{{ session('success')['messages'] }}</h3>
+    @else
+        <h3>Não houve retorno</h3>
+    @endif
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Investindo</title>
+</head>
+<body>
+        <form method= "post" action=" {{ route('user.store') }} " ">
+            {!! csrf_field() !!}
+            <p>Acesse o sistema</p>
+            <label for="cpfInputEmail1">
+               <input type="text" class="form-control" name="cpf" aria-describedby="cpfHelp" placeholder="CPF">
+            </label>
+            <label for="nameInputPassword1">
+                <input type="text" class="form-control" name="name" placeholder="Name">
+            </label>
+            <br>
+            <label for="phoneInputPassword1">
+                <input type="text" class="form-control" name="phone" placeholder="Phone">
+            </label>
+            <label for="emailInputPassword1">
+                <input type="email" class="form-control" name="email" placeholder="Email">
+            </label>
+            <br>
+            <label for="exampleInputPassword2">
+                <input type="password" class="form-control" name="password" placeholder="Password">
+            </label>
+            <button type="submit" style="width: 226px;" class="btn btn-1">Cadastrar</button>
+        </form>
+</body>
+</html>
+@endsection

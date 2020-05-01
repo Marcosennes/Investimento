@@ -1,0 +1,198 @@
+*{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    outline: none;
+    border: none;
+
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+           -box-sizing: border-box;
+}
+
+body{
+    background: #f3f3f3;
+}
+
+/*
+* ================================================================
+* stylesheet to login pages
+* ================================================================
+*/
+
+div.background{
+    position: absolute;
+    left: 0;
+    width: calc(100% - 300px);
+    height: 100%;
+    background: url("../assets/images/background_login.jpg");
+    background-size: cover;
+
+}
+
+section#conteudo-view{
+    position: absolute; /* Faz com que ocupe todo o comprimento */
+    right: 0;   /* Faz com que a janela se situe na direita */
+    float: right;
+    padding: 60px; /* altera a proporção do conteúdo da section no caso */
+    height: 100%;  /* Altura */
+    background: #51dca6;
+    width: 450px;
+}
+
+section#conteudo-view h1{
+    font: 3em 'Fredoka One', cursive;
+    color: #f3f3f3;
+    float: left;
+    width: 100%;      /* Largura */
+    margin-top: 50 px;
+}
+
+section#conteudo-view h3,
+section#conteudo-view form p{
+    font: .8em 'Fredoka One', cursive;
+    color: #f3f3f3;
+    float: left;
+    width: 100%;
+    margin-top: 70 px;
+}
+
+section#conteudo-view form,
+section#conteudo-view form label{
+    float: left;
+    width: 100%;
+    margin-bottom: 10px;   
+}
+
+section#conteudo-view form{
+    margin-top: 40px;
+}
+
+section#conteudo-view form p{
+    font-size: 1.25em;
+}
+
+section#conteudo-view form button[type="submit"],
+section#conteudo-view form label input{
+    float: left;
+    width: 100%;
+    height: 40px;
+    border-radius: 20px;
+    padding: 0 20px;
+    border: 2px solid #52ca9b;
+    color: #959595;
+    font: 1em 'Arial';
+}
+section#conteudo-view form button[type="submit"]{
+    background: #00ff9c;
+    text-align: center;
+    font: 1em 'Fredoka One', cursive; 
+    color: #f9f9f9;
+    width: 60%;
+    float: right;  /* Alinhamento */
+}
+
+/*
+* ================================================================
+* stylesheet to menu lateral 
+* ================================================================
+*/
+
+#principal{
+    position: fixed;
+    float: left;
+    width: 250px;
+    height: 100%;
+    z-index: 5; /* posição " z "  define quem fica em cima de quem. Nesse caso é pra deixar o menu a cima do conteudo do form*/
+    background: #f9f9f9;
+    border-right: 1px solid #e9e9e9;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+}
+
+.lista{
+    float: left;
+    width: 100%;
+}
+
+
+.amenu{
+    float: left;
+    width: 100%;
+    height: 80px;
+    border-bottom: 1px solid #e9e9e9;
+}
+
+.imenu{
+    float: left;
+    height: 50px;
+    width: 50px;
+    color: inherit;
+    text-align: center;
+    line-height: 80px; /* Altura do início do li até o meio do item */
+    font-size: 1.5em;
+    color: #9c9c9c;
+}
+
+.h3menu{
+    float: left; /* O texto começa na esquerda */
+    width: 80px;
+    height: 80px;
+    border-bottom: 1px solid #e9e9e9;
+    font: 1.3em/80px 'Fredoka One', cursive;
+    color: #9c9c9c;
+}
+
+#a1:hover i,
+#a1:hover h3{
+    color: #51dca6;
+}
+
+.alogout{
+    float: left;
+    width: 100%;
+    height: 80px;
+    border-bottom: 1px solid #e9e9e9; 
+}
+
+.ilogout{
+    float: left;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    line-height: 80px; /* Altura do início do li até o meio do item */
+    font-size: 1.5em;
+    color: #d32b2b;
+}
+
+.h3logout{
+    float: left; /* O texto começa na esquerda */
+    width: 80px;
+    height: 80px;
+    border-bottom: 1px solid #e9e9e9;
+    font: 1.3em/80px 'Fredoka One', cursive;
+    color: #d32b2b;
+}
+
+.sectionmain{
+    position: fixed;
+    float: left;
+    width: 100%;
+    height: 100%;
+    padding: 20px 20px 20px 270px;
+    z-index: 1;
+}
+
+#view-conteudo{
+    position: fixed;
+    float: left;
+    width: 100%;
+    height: 100%;
+    padding: 20px 20px 20px 270px;
+    z-index: 1;
+}
+
+.btn-1{
+    color: white; 
+    background-color: #51dca6; 
+    border: #51dca6;
+}
