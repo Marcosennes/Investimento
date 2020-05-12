@@ -1,12 +1,3 @@
-@extends('templates.master')
-
-@section('conteudo-view')
-
-@if(session('success'))
-    <h3>{{ session('success')['messages'] }}</h3>
-@endif
-
-<!--
 <div class="col-md-12">
     <table class="table">
         <thead class="thead-dark">
@@ -23,7 +14,7 @@
             </tr>        
         </thead>
         <tbody>
-            @foreach ($users as $user)
+            @foreach ($user_list as $user)
                 <tr>
                     <th scope="row"> {{ $user->id}} </th>
                     <td> {{ $user->formatted_cpf}}        </td>
@@ -39,12 +30,10 @@
                             <input name="_method" type="hidden" value="DELETE">
                             <button class="btn btn-1" type="submit">Remove</button>
                         </form>
+                        <a href=" {{ route('user.edit', $user->id) }} ">Editar</a>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
 </div>
--->
-@include('user.list', ['user_list' => $users])
-@endsection

@@ -28,10 +28,13 @@
                     <th scope="row">    {{ $inst->id}}          </th>
                     <td>                {{ $inst->name}}        </td>
                     <td> 
-                        <form method="delete" action=" {{ route('instituition.destroy', ['id'=> $inst->id]) }} ">
+                        <form method="POST" accept-charset="UTF-8" action=" {{ route('instituition.destroy', ['id'=> $inst->id]) }} ">
                             {!! csrf_field() !!}
-                            <button type="submit">Remove</button>
+                            <input name="_method" type="hidden" value="DELETE">
+                            <button class="btn btn-1" type="submit">Remove</button>
                         </form>
+                    <a href="{{ route('instituition.show', $inst->id) }}">Detalhes</a>
+                    <a href="{{ route('instituition.edit', $inst->id) }}">editar</a>
                     </td>
                 </tr>
             @endforeach

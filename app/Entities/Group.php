@@ -28,15 +28,23 @@ class Group extends Model implements Transformable
 
     ];
 
-    public function owner()                     // Define um relacionamento de Grupo com Usuário
+    public function user()                                  // Define um relacionamento de Grupo com Usuário
     {
-        return $this->belongsTo(User::class);   // O Grupo pertence a um usuário 
+        return $this->belongsTo(User::class, 'user_id');    // se o nome da função for o mesmo da tabela( nesse caso user é nome da função e da tabela ),
+                                                            //não é necessário o segundo parâmetro de belongsTo ( 'user_id' )
+                                                            //Se o nome da função for difernte da tabela esse campo é necessário para definir a tabela que vai fazer o relacionamento
+                                                            //Quando tiver um objeto do tipo Group, podemos acessar por exemplo quem seria o usuário relacionado com $group->user->name
+    }
 
-                                                //Quando tiver um objeto do tipo Group, podemos acessar por exemplo quem seria o usuário relacionado com $group->owner->name
+    public function users(){    //o nome é users pois mostra todos os usuários que estao nesse grupo
+        
+        //Relacionamento N:N
+        return $this->belongsToMany(User::class, 'user_groups');    //tabela que gera o apoio pra esse relacionamento
     }
 
     public function instituition(){
 
+        //Relacionamento N:1
         return $this->belongsTo(Instituition::class);
 
     }

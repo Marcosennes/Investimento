@@ -12,14 +12,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/login', ['uses'=> 'loginController@fazerLogin']);
+
+Route::get('/', ['uses'=> 'loginController@fazerLogin']);
 Route::post('/login', ['uses'=> 'dashboardController@auth', 'as'=>'user.login']);
 Route::get('/dashboard', ['uses'=> 'dashboardController@index', 'as'=>'user.dashboard']);
 
 Route::resource('user', 'UsersController');
 Route::resource('instituition', 'InstituitionsController');
 Route::resource('group', 'GroupsController');
+
+Route::post('group/{group_id}/user', ['as' => 'group.user.store', 'uses' => 'GroupsController@userStore']);
