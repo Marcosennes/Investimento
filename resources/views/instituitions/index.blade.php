@@ -33,8 +33,9 @@
                             <input name="_method" type="hidden" value="DELETE">
                             <button class="btn btn-1" type="submit">Remove</button>
                         </form>
-                    <a href="{{ route('instituition.show', $inst->id) }}">Detalhes</a>
-                    <a href="{{ route('instituition.edit', $inst->id) }}">editar</a>
+                    <a href="{{ route('instituition.show',          $inst->id) }}">Detalhes</a>
+                    <a href="{{ route('instituition.edit',          $inst->id) }}">editar</a>
+                    <a href="{{ route('instituition.product.index', $inst->id) }}">produtos</a>
                     </td>
                 </tr>
             @endforeach

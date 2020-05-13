@@ -20,6 +20,16 @@ Route::get('/dashboard', ['uses'=> 'dashboardController@index', 'as'=>'user.dash
 
 Route::resource('user', 'UsersController');
 Route::resource('instituition', 'InstituitionsController');
+
+Route::resource('instituition.product', 'ProductsController'); 
+
+/*
+ * Trabalhamos dessa forma quando temos um escopo dentro de outro
+ * Use route:list pra ver como ficou o direcionamento das rotas
+ * Cada view de produto é chamada com o id da sua instituição e seu id no link
+ */
+Route::get('moviment', ['uses' =>'MovimentsController@application', 'as' => 'moviment.application']);
+
 Route::resource('group', 'GroupsController');
 
 Route::post('group/{group_id}/user', ['as' => 'group.user.store', 'uses' => 'GroupsController@userStore']);
