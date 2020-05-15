@@ -28,6 +28,21 @@ class Group extends Model implements Transformable
 
     ];
 
+    public function getTotalValueAttribute(){
+
+        /*
+        $total = 0;
+        foreach($this->moviments as $moviment){
+
+            $total += $moviment->value;
+        }        
+        return $total;        
+        */
+
+        return $this->moviments->sum('value');
+
+    }
+
     public function user()                                  // Define um relacionamento de Grupo com Usuário
     {
         return $this->belongsTo(User::class, 'user_id');    // se o nome da função for o mesmo da tabela( nesse caso user é nome da função e da tabela ),
@@ -47,6 +62,11 @@ class Group extends Model implements Transformable
         //Relacionamento N:1
         return $this->belongsTo(Instituition::class);
 
+    }
+
+    public function moviments()
+    {
+        return $this->hasMany(Moviment::class);
     }
 
 }

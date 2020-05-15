@@ -18,17 +18,24 @@ Route::get('/', ['uses'=> 'loginController@fazerLogin']);
 Route::post('/login', ['uses'=> 'dashboardController@auth', 'as'=>'user.login']);
 Route::get('/dashboard', ['uses'=> 'dashboardController@index', 'as'=>'user.dashboard']);
 
+Route::get('moviment', ['uses' =>'MovimentsController@application', 'as' => 'moviment.application']);
+Route::post('moviment', ['uses' => 'MovimentsController@storeApplication', 'as' => 'moviment.application.store']);
+/*
+ * O início dessa rota possui "user". Temos que ter cuidado pois existe Route::resource pra "user"
+ * Com isso, a rota "user/moviment" teve de vir antes do resource para não cair no mesmo
+ * Caso fosse declarada após o resource, seria retornado um erro
+ */
+Route::get('user/moviment', ['uses' => 'MovimentsController@index', 'as' => 'moviment.index']);
+
 Route::resource('user', 'UsersController');
 Route::resource('instituition', 'InstituitionsController');
-
-Route::resource('instituition.product', 'ProductsController'); 
-
 /*
  * Trabalhamos dessa forma quando temos um escopo dentro de outro
  * Use route:list pra ver como ficou o direcionamento das rotas
  * Cada view de produto é chamada com o id da sua instituição e seu id no link
  */
-Route::get('moviment', ['uses' =>'MovimentsController@application', 'as' => 'moviment.application']);
+Route::resource('instituition.product', 'ProductsController'); 
+
 
 Route::resource('group', 'GroupsController');
 

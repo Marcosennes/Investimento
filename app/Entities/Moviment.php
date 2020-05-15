@@ -39,4 +39,16 @@ class Moviment extends Model implements Transformable
     public function product(){
         return $this->belongsTo(Product::class);
     }
+
+    public function scopeProduct($query, $product){   //Investir dinheiro
+        return $query->where('product_id', $product->id);
+    }
+    
+    public function scopeApplications($query){   //Investir dinheiro
+        return $query->where('type', 1);
+    }
+
+    public function scopeOutflows($query){   //Retirada de dinheiro
+        return $query->where('type', 2);
+    }
 }

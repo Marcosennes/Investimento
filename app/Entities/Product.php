@@ -30,10 +30,22 @@ class Product extends Model implements Transformable
 
     ];
 
-    public function instituition(){
+    public function instituition(){     //No singular pois o produto pertence a uma instituição
 
         return $this->belongsTo(Instituition::class);   //belong = pertence
 
+    }
+
+    public function moviments()     //moviments no plural pois um produto pode possuir vários movimentos
+    {
+        return $this->hasMany(Moviment::class);
+    }
+
+    public function valueFromUser(User $user)
+    {
+        $applications = $this->moviments()->product($this)->applications()->sum('value');        
+        $outflows = $this->moviments()->product($this)->outflows()->sum('value');        
+        return $applications - $outflows;  
     }
 
 }

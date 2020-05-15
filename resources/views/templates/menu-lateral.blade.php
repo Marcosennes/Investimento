@@ -20,18 +20,24 @@
         </li>
         <li class="lista">
             <a id="a1" class="amenu" href=" {{ route('user.dashboard') }} ">
-                <i class="imenu fas fa-money"></i>
+                <i class="imenu fas fa-user-plus"></i>
                 <h3 class="h3menu">Cadastrar</h3>
             </a>
         </li>
         <li class="lista">
             <a id="a1" class="amenu" href=" {{ route('moviment.application') }} ">
-                <i class="imenu fas fa-user-plus"></i>
+                <i class="imenu fas fa-coins"></i>
                 <h3 class="h3menu">Investir</h3>
             </a>
         </li>
+        <li class="lista">
+            <a id="a1" class="amenu" href=" {{ route('moviment.index') }} ">
+                <i class="imenu fas fa-coins"></i>
+                <h3 class="h3menu">Aplicações</h3>
+            </a>
+        </li>
     </ul>
-    <ul class="lista" style="margin-top: 380px;">
+    <ul class="lista" style="margin-top: 220px;">
         <li class="lista" style="">
             <a class="alogout" href="">
                 <i class="fas fa-door-open ilogout"></i>

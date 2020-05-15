@@ -31,12 +31,12 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function groups(){       //O nome é grupos pois mostra todos os grupos em que esse usuário está
-        
+    public function groups(){       //O nome é groups pois mostra todos os grupos em que esse usuário está
+                                    //Tem que ser no plural pq o usuário pode estar em mais de um grupo
         //Relacionamento N:N
         return $this->belongsToMany(Group::class, 'user_groups');   //tabela que gera o apoio pra esse relacionamento
                                                                     // O laravel identifica as chaves que vão realizar o auxílio.
-                                                                    // Caso o nome dastabelas esteja diferente do padrão devem ser especidifados depois dos atributos
+                                                                    // Caso o nome das tabelas esteja diferente do padrão devem ser especidifados depois dos atributos
     }
 
     public function setPasswordAttribute($value){

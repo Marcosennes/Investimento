@@ -4,6 +4,7 @@
             <th scope="col">#</th>        
             <th scope="col">Nome do grupo</th>        
             <th scope="col">Nome da instituição</th>        
+            <th scope="col">Investimento</th>        
             <th scope="col">Nome do responsável</th>        
             <th scope="col">Opções</th>        
         </tr>        
@@ -11,10 +12,11 @@
     <tbody>
         @foreach ($group_list as $group)
             <tr>
-                <th scope="row">    {{ $group->id}}          </th>
-                <td>                {{ $group->name}}        </td>
-                <td>                {{ $group->instituition->name}}        </td>
-                <td>                {{ $group->user->name}}        </td>
+                <th scope="row">    {{ $group->id}}                 </th>
+                <td>                {{ $group->name}}               </td>
+                <td>                {{ $group->instituition->name}} </td>
+                <td>             R$ {{ number_format($group->total_value, 2, ',', '.')}}        </td>
+                <td>                {{ $group->user->name}}         </td>
                 <td> 
                     <form method="POST" accept-charset="UTF-8" action=" {{ route('group.destroy', ['id'=> $group->id]) }} ">
                         {!! csrf_field() !!}
