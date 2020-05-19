@@ -31,13 +31,25 @@
             </a>
         </li>
         <li class="lista">
+            <a id="a1" class="amenu" href=" {{ route('moviment.getback') }} ">
+                <i class="imenu fas fa-coins"></i>
+                <h3 class="h3menu">Resgatar</h3>
+            </a>
+        </li>
+        <li class="lista">
             <a id="a1" class="amenu" href=" {{ route('moviment.index') }} ">
                 <i class="imenu fas fa-coins"></i>
                 <h3 class="h3menu">Aplicações</h3>
             </a>
         </li>
+        <li class="lista">
+            <a id="a1" class="amenu" href=" {{ route('moviment.all') }} ">
+                <i class="imenu fas fa-receipt"></i>
+                <h3 class="h3menu">Extrato</h3>
+            </a>
+        </li>
     </ul>
-    <ul class="lista" style="margin-top: 220px;">
+    <ul class="lista" style="margin-top: 60px;">
         <li class="lista" style="">
             <a class="alogout" href="">
                 <i class="fas fa-door-open ilogout"></i>

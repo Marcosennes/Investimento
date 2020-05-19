@@ -12,8 +12,9 @@
     <tbody>
         @foreach ($group_list as $group)
             <tr>
+
                 <th scope="row">    {{ $group->id}}                 </th>
-                <td>                {{ $group->name}}               </td>
+                <td>                {{ $group->name}} </td>
                 <td>                {{ $group->instituition->name}} </td>
                 <td>             R$ {{ number_format($group->total_value, 2, ',', '.')}}        </td>
                 <td>                {{ $group->user->name}}         </td>

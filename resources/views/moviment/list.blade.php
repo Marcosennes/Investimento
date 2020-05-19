@@ -1,7 +1,6 @@
 <table class="table">
     <thead class="thead-dark">
         <tr>
-            <th scope="col">#</th>        
             <th scope="col">Produto</th>        
             <th scope="col">Nome da instituição</th>        
             <th scope="col">Valor investido</th>    

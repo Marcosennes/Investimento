@@ -39,6 +39,11 @@ class User extends Authenticatable
                                                                     // Caso o nome das tabelas esteja diferente do padrão devem ser especidifados depois dos atributos
     }
 
+   public function moviments()
+   {
+       return $this->hasmany(Moviment::class);
+   } 
+
     public function setPasswordAttribute($value){
         
         $this->attributes['password'] = env('PASSWORD_HASH') ? bcrypt($value) : $value;

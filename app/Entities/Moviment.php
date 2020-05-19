@@ -3,6 +3,8 @@
 namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
@@ -50,5 +52,44 @@ class Moviment extends Model implements Transformable
 
     public function scopeOutflows($query){   //Retirada de dinheiro
         return $query->where('type', 2);
+    }
+    public function search(Array $data, $totalPage)
+    {
+        $user_id = Auth::id();
+        $products = $this
+                        ->join('products', function($join)
+                        {
+                            $join->on('moviments.product_id', '=', 'products.id');
+                        })
+                        ->join('groups', function($join)
+                        {
+                            $join->on('moviments.group_id', '=', 'groups.id');
+                        })
+                        ->where(function($query) use($data, $user_id){
+
+                            $query->where('moviments.user_id', '=', $user_id);
+                            if(isset($data['product_name']))
+                            {
+                                $query->where('products.name', '=', $data['product_name']);
+                            }
+                            if(isset($data['group_name']))
+                            {
+                                $query->where('groups.name', '=', $data['group_name']);
+                            }
+                        })
+                        ->paginate(11);
+        return $products;
+    }
+
+    public function listar()
+    {
+        $id_user = Auth::id();
+
+        $moviment_list = $this
+        ->where('user_id', '=', $id_user)
+        ->select('*')
+        ->paginate(11);
+
+        return $moviment_list;
     }
 }

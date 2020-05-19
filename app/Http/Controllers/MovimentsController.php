@@ -52,6 +52,20 @@ class MovimentsController extends Controller
         ]);
     }
 
+    public function all(Moviment $moviment)
+    {
+        $id_user     = Auth::id();
+        
+        $moviment_list = $moviment->listar();
+
+        /*                    
+        $moviment_list = Auth::user()->moviments;   // Sem paginação
+        */
+        return view('moviment.all', [
+            'moviment_list' => $moviment_list,
+        ]);
+    }
+
     public function application(){
 
         
@@ -115,5 +129,117 @@ class MovimentsController extends Controller
         ]);
     
         return redirect()->route('moviment.application');
+    }
+
+    public function getback(){
+        
+        $user   = Auth::user();
+        $id_user     = Auth::id();
+
+        $GLOBALS['id_user'] = $id_user;
+        $user_group_list = DB::table('user_groups')
+                    ->join('groups', function($join){
+                        $join->on('user_groups.group_id', '=', 'groups.id')
+                             ->where('user_groups.user_id', '=', $GLOBALS['id_user']);
+                    })
+                    ->select('groups.id', 'groups.name')
+                    ->get();
+
+        $product_list = DB::table('products')
+                        ->select('id', 'name')
+                        ->get();
+
+                        
+        return view('moviment.getback', [
+            'user_group_list'    => $user_group_list,
+            'product_list'  => $product_list,
+        ]);
+    }
+
+    public function storeGetBack(Request $request){
+
+        $user_id     = Auth::id();
+        $value_application_list = DB::table('moviments')
+                                ->where([
+                                    ['user_id', '=', $user_id],
+                                    ['product_id', '=', $request->product_id],
+                                    ['group_id', '=', $request->group_id],
+                                    ['type', '=', 1],
+                                ])
+                                ->select('value')
+                                ->get();
+        
+        $value_getback_list = DB::table('moviments')
+                                ->where([
+                                    ['user_id', '=', $user_id],
+                                    ['product_id', '=', $request->product_id],
+                                    ['group_id', '=', $request->group_id],
+                                    ['type', '=', 2],
+                                ])
+                                ->select('value')
+                                ->get();
+        $total_application_value = 0;
+        $total_getback_value = 0;
+
+        foreach($value_application_list as $array)
+        {
+
+            $total_application_value += $array->value;
+        }
+
+        foreach($value_getback_list as $array)
+        {
+
+            $total_getback_value += $array->value;
+        }
+
+        $remaining_value = $total_application_value - $total_getback_value;
+
+        
+        $product_name_array = DB::table('products')
+                            ->where('id', '=', $request->product_id)
+                            ->select('name')
+                            ->get();
+
+        $group_name_array = DB::table('groups')
+                            ->where('id', '=', $request->group_id)
+                            ->select('name')
+                            ->get();
+
+        if($remaining_value < $request->value)
+        {
+            session()->flash('fail', [
+                'success'   => false,
+                'messages'  => "Resgate de ". $request->value ." reais no produto " . $product_name_array[0]->name . " falhou pois seu saldo neste produto pelo grupo " . $group_name_array[0]->name . " é: R$" . $remaining_value  
+            ]);
+
+            return redirect()->route('moviment.getback');
+        }
+        $movimento = Moviment::create([
+
+            'user_id'       =>Auth::user()->id,
+            'group_id'      =>$request->get('group_id'),
+            'product_id'    =>$request->get('product_id'),
+            'value'         =>$request->get('value'),
+            'type'          =>2,                // 1 Movimentação para adição de dinheiro
+                                                // 2 Movimentação para resgate de dinheiro
+        ]);
+
+        session()->flash('success', [
+            'success'   => true,
+            'messages'  => "Resgate de ". $movimento->value ." reais no produto " . $movimento->product->name . " pelo grupo " . $group_name_array[0]->name . " foi realizada com sucesso" 
+        ]);
+    
+        return redirect()->route('moviment.getback');
+    }
+
+    public function searchMoviments(Request $request, Moviment $moviment)
+    {
+        $moviment_list = $moviment->search($request->all(), 10);
+
+        return view('moviment.all', [
+            'moviment_list' => $moviment_list,
+            'dataForm'      => $request->except('_token'),
+        ]);
     }
 }

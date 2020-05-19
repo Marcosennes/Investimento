@@ -137,9 +137,8 @@ class GroupsController extends Controller
     public function edit($id)
     {
         $group = $this->repository->find($id);
-        $user_list          = DB::table('users')->select('id', 'name')->get(); ;
+        $user_list          = DB::table('users')->select('id', 'name')->get();
         $instituition_list  = DB::table('instituitions')->select('id', 'name')->get(); ;
-
         return view('groups.edit', [
             'group'             => $group,
             'user_list'         => $user_list,

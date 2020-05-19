@@ -45,6 +45,7 @@ class Product extends Model implements Transformable
     {
         $applications = $this->moviments()->product($this)->applications()->sum('value');        
         $outflows = $this->moviments()->product($this)->outflows()->sum('value');        
+        
         return $applications - $outflows;  
     }
 
