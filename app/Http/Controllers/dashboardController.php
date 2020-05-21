@@ -39,7 +39,7 @@ class DashboardController extends Controller
             }else
             {
                 $user = $this->repository->findWhere(['email' => $request->get('email')])->first();
-                
+
                 if(!$user){
                     throw new Exception("Email informado é inválido.");
                 }

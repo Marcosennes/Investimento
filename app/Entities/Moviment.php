@@ -88,7 +88,7 @@ class Moviment extends Model implements Transformable
         $moviment_list = $this
         ->where('user_id', '=', $id_user)
         ->select('*')
-        ->paginate(11);
+        ->Paginate(11);
 
         return $moviment_list;
     }

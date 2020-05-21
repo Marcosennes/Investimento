@@ -32,6 +32,11 @@ class CreateUsersTable extends Migration
 			$table->string('permission')->default('app.user');
 			
 			$table->rememberToken();
+			/*
+			 * Evitar de usar. o destroy e edir no método UsersController foram implementados de forma diferente
+			 * pois o softDeletes afeta os dois. Ele não apaga os arquivos simplesmente adiciona deleted_at aquele registro
+			 *  e o sistema não lê ele mais, mas no banco ele aparece só que com o campo deleted_at com a data em que foi mandado remover.
+			 */
 			$table->softDeletes();
 			$table->timestamps();
 		

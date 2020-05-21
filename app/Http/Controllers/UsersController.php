@@ -136,7 +136,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        $request = $this->repository->delete($id);
+        $request = $this->repository->deleteWhere(['id' => $id]);
 
         return redirect()->route('user.index');
     }

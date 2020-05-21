@@ -69,7 +69,7 @@ class InstituitionService{
 
         try{
 
-            $this->repository->delete($inst_id);
+            //$this->repository->delete($inst_id);
 
             return [
                 'success'  => 'true',

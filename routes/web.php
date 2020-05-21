@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
+Route::get('/logout', function(){
+        return view('user.login');
+})->name('logout');
 Route::get('/', ['uses'=> 'loginController@fazerLogin']);
 Route::post('/login', ['uses'=> 'dashboardController@auth', 'as'=>'user.login']);
 Route::get('/dashboard', ['uses'=> 'dashboardController@index', 'as'=>'user.dashboard']);
