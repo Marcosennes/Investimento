@@ -11,6 +11,8 @@ use App\Http\Requests\InstituitionCreateRequest;
 use App\Http\Requests\InstituitionUpdateRequest;
 use App\Repositories\InstituitionRepository;
 use App\Services\InstituitionService;
+use Illuminate\Support\Facades\Auth;
+
 /**
  * Class InstituitionsController.
  *
@@ -43,10 +45,12 @@ class InstituitionsController extends Controller
      */
     public function index()
     {
+        $user_permission = Auth::user()->permission;
         $instituitions = $this->repository->all();
 
         return view('instituitions.index', [
-            'instituitions' => $instituitions,
+            'instituitions'     => $instituitions,
+            'user_permission'   => $user_permission,
         ]);
     }
 
@@ -81,10 +85,12 @@ class InstituitionsController extends Controller
      */
     public function show($id)
     {
+        $user_permission = Auth::user()->permission;
         $instituition = $this->repository->find($id);
         return view('instituitions.show',[
 
-            'instituition' => $instituition,
+            'instituition'      => $instituition,
+            'user_permission'   => $user_permission,
         ]);
     }
 

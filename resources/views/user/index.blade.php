@@ -46,5 +46,5 @@
     </table>
 </div>
 -->
-@include('user.list', ['user_list' => $users])
+@include('user.list', ['user_list' => $users, 'user_permission' => $user_permission])
 @endsection

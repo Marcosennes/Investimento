@@ -18,12 +18,21 @@
                 <h3 class="h3menu">Grupos</h3>
             </a>
         </li>
-        <li class="lista">
-            <a id="a1" class="amenu" href=" {{ route('user.dashboard') }} ">
-                <i class="imenu fas fa-user-plus"></i>
-                <h3 class="h3menu">Cadastrar</h3>
-            </a>
-        </li>
+        <?php
+        use Illuminate\Support\Facades\Auth;
+        $userPermission = Auth::user()->permission;
+        
+        ?>
+        @if($userPermission == "app.admin")
+        <div id="cadastrar">
+            <li class="lista">
+                <a id="a1" class="amenu" href=" {{ route('user.dashboard') }} ">
+                    <i class="imenu fas fa-user-plus"></i>
+                    <h3 class="h3menu">Cadastrar</h3>
+                </a>
+            </li>
+        </div>
+        @endif
         <li class="lista">
             <a id="a1" class="amenu" href=" {{ route('moviment.application') }} ">
                 <i class="imenu fas fa-coins"></i>

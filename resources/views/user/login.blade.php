@@ -11,6 +11,7 @@
     <link rel="stylesheet" href=" {{ asset('css/stylesheet.css') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fredoka+One">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
 </head>
 <body>
 
@@ -43,26 +44,53 @@
             </form>
         </div>
         <div id="register" style="display: none;">
-            <form method= "post" action=" {{ route('user.store') }} " ">
+            <form id="form_register" method= "post" action=" {{ route('user.store') }} " ">
                 {!! csrf_field() !!}
-                <label for="cpfInputEmail1">
-                   <input type="text" class="form-control" name="cpf" aria-describedby="cpfHelp" placeholder="CPF">
+                <label for="cpfInputCpf">
+                   <input type="text" id="cpf" class="form-control" name="cpf" aria-describedby="cpfHelp" placeholder="CPF">
                 </label>
-                <label for="nameInputPassword1">
-                    <input type="text" class="form-control" name="name" placeholder="Name">
+                <div style="display: none" id="cpf_incorreto">
+                    <span style="color: red;">CPF deve possuir 11 dígitos</span>
+                </div>
+                <label for="nameInputName">
+                    <input type="text" id="usernamesignup" class="form-control" name="name" placeholder="Name">
                 </label>
+                <div style="display: none" id="nome_cadastro_vazio">
+                    <span style="color: red;">Preencha o nome</span>
+                </div>
                 <br>
-                <label for="phoneInputPassword1">
-                    <input type="text" class="form-control" name="phone" placeholder="Phone">
+                <label for="phoneInputPhone">
+                    <input type="text" id="phone" class="form-control" name="phone" placeholder="Phone">
                 </label>
-                <label for="emailInputPassword1">
-                    <input type="email" class="form-control" name="email" placeholder="Email">
+                <div style="display: none" id="phone_incorreto">
+                    <span style="color: red;">Deve possuir somente números</span>
+                </div>
+                <label for="email">
+                    <input type="email" id="emailsignup" class="form-control" name="email" placeholder="Email">
                 </label>
+                <div style="display: none" id="email_cadastro_vazio">
+                    <span style="color: red;">Preencha o E-mail</span>
+                </div>
                 <br>
-                <label for="exampleInputPassword2">
+                <label for="exampleInputPassword">
                     <input type="password" class="form-control" name="password" placeholder="Password">
                 </label>
+                <div style="display: none" id="password_cadastro_vazia">
+                    <span style="color: red;">A senha deve possuir pelo menos 5 caracteres</span>
+                </div>
+                <label for="exampleInputConfirmPassword">
+                    <input type="password" id="passwordsignup_confirm" class="form-control" name="password" placeholder="Password">
+                </label>
+                <div style="display: none" id="password_confirm_cadastro_vazia">
+                    <span style="color: red;">Preencha a senha</span>
+                </div>
                 <button type="submit" style="width: 226px;" class="btn btn-1">Cadastrar</button>
+                <div style="display: none" id="senhas_diferentes">
+                    <span style="color: red;">As senhas informadas não correspondem</span>
+                </div>
+                <div style="display: none" id="email_ja_cadastrado">
+                    <span style="color: red;">O E-mail já se encontra cadastrado</span>
+                </div>
             </form>
             
             <button class="btn-1 btn-primary" id="login_button">Login</button>
@@ -99,4 +127,59 @@
             $('#register').hide();
         })
     })
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#form_register').submit(function(event) {
+    
+            var oCadastrar = {
+                cpf:                            $('#cpf').val(),
+                nome_cadastro:                  $('#usernamesignup').val(),
+                phone:                          $('#phone').val(),
+                email_cadastro:                 $('#emailsignup').val(),
+                password_cadastro:              $('#passwordsignup').val(),
+                password_confirmacao_cadastro:  $('#passwordsignup_confirm').val(),
+            }
+            
+            $('#nome_cadastro_vazio').hide();
+            $('#email_cadastro_vazio').hide();
+            $('#email_ja_cadastrado').hide();
+            $('#password_cadastro_vazia').hide();
+            $('#password_confirm_cadastro_vazia').hide();
+            $('#senhas_diferentes').hide();
+    
+            if (oCadastrar.nome_cadastro == '' || oCadastrar.email_cadastro == '' || oCadastrar.password_cadastro.length < 5 ||
+                oCadastrar.password_cadastro == "" || oCadastrar.password_confirmacao_cadastro == "" || oCadastrar.password_cadastro !=
+                oCadastrar.password_confirmacao_cadastro) {
+                if (oCadastrar.nome_cadastro == "") {
+                    $('#nome_cadastro_vazio').show();
+                    $('#usernamesignup').focus();
+                    die
+                }
+                if (oCadastrar.email_cadastro == "") {
+                    $('#email_cadastro_vazio').show();
+                    if (oCadastrar.nome_cadastro != "" && oCadastrar.email_cadastro == "") {
+                        $('#emailsignup').focus();
+                    }
+                }
+                if (oCadastrar.password_cadastro.length < 5) {
+                    $('#password_cadastro_vazia').show();
+                    if (oCadastrar.nome_cadastro != "" && oCadastrar.email_cadastro != "" && oCadastrar.password_cadastro == "") {
+                        $('#passwordsignup').focus();
+                    }
+                }
+                if (oCadastrar.password_confirmacao_cadastro.length < 5) {
+                    $('#password_confirm_cadastro_vazia').show();
+                    if (oCadastrar.nome_cadastro != "" && oCadastrar.email_cadastro != "" && (oCadastrar.password_cadastro != "" || oCadastrar.password_cadastro.length >= 5) && oCadastrar.password_confirmacao_cadastro == "") {
+                        $('#passwordsignup_confirm').focus();
+                    }
+                }
+                if (oCadastrar.password_cadastro != "" && oCadastrar.password_confirmacao_cadastro != "" && oCadastrar.password_cadastro != oCadastrar.password_confirmacao_cadastro) {
+                    $('#senhas_diferentes').show();
+                }
+            }
+            event.preventDefault();
+        });
+    });
 </script>

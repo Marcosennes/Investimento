@@ -12,7 +12,7 @@ use App\Http\Requests\ProductCreateRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use App\Repositories\ProductRepository;
 use App\Validators\ProductValidator;
-
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class ProductsController.
@@ -50,6 +50,7 @@ class ProductsController extends Controller
      */
     public function index($instituition_id)
     {
+        $user_permission = Auth::user()->permission;
         $instituition = Instituition::find($instituition_id);
        /*
         * //findWhere trás nesse caso somente os produtos da instituição com id correspondente
@@ -62,7 +63,8 @@ class ProductsController extends Controller
         //$products     = $this->repository->all();
 
         return view('instituitions.product.index', [
-            'instituition' => $instituition,
+            'instituition'      => $instituition,
+            'user_permission'   => $user_permission,
         ]);
 
     }

@@ -17,6 +17,6 @@
 <button class="btn btn-1" type="submit">Relacionar ao Grupo: {{ $group->name }}</button>
 </form> 
 
-@include('user.list', ['user_list' => $group->users])
+@include('user.list', ['user_list' => $group->users, 'user_permission' => $user_permission])
 
 @endsection

@@ -12,6 +12,8 @@ use App\Http\Requests\UserUpdateRequest;
 use App\Repositories\UserRepository;
 use App\Validators\UserValidator;
 use \App\Services\UserService;
+use Illuminate\Support\Facades\Auth;
+
 /**
  * Class UsersController.
  *
@@ -45,10 +47,12 @@ class UsersController extends Controller
      */
     public function index()
     {
+        $user_permission = Auth::user()->permission;
         $users = $this->repository->all();
 
         return view('user.index', [
-            'users' => $users
+            'users' => $users,
+            'user_permission' => $user_permission,
         ]);
     }
 

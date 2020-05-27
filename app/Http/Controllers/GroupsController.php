@@ -16,6 +16,8 @@ use App\Repositories\UserRepository;
 use App\Services\GroupService;
 use App\Validators\GroupValidator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
 
 /**
  * Class GroupsController.
@@ -60,17 +62,12 @@ class GroupsController extends Controller
      */
     public function index()
     {
+        $user_permission = Auth::user()->permission;
         $groups = $this->repository->all();
 
-        //$user_list = $this->userRepository->selectBoxList();              // Trás somente id => nome
-        //$user_list = User::pluck('name', 'id')->all();                    // Trás somente id => nome
-        $user_list = DB::table('users')->select('id', 'name')->get();       //Lembrar de importar DB. Funciona parecido com uma consulta de select, from , where. Table faz o papel do from
-        $instituition_list = DB::table('instituitions')->select('id', 'name')->get();
-
         return view('groups.index', [
-            'groups'            => $groups,
-            'user_list'         => $user_list,
-            'instituition_list' => $instituition_list,
+            'groups' => $groups,
+            'user_permission' => $user_permission,
         ]);
     }
 
@@ -117,12 +114,14 @@ class GroupsController extends Controller
      */
     public function show($id)
     {
+        $user_permission = Auth::user()->permission;
         $user_list = DB::table('users')->select('id', 'name')->get();       //Lembrar de importar DB. Funciona parecido com uma consulta de select, from , where. Table faz o papel do from
         $group = $this->repository->find($id);
 
         return view('groups.show', [
             'group' => $group,
             'user_list' => $user_list,
+            'user_permission' =>$user_permission,
 
         ]);
     }

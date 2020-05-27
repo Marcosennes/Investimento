@@ -10,7 +10,9 @@
                 <th scope="col">E-mail</th>        
                 <th scope="col">Status</th>        
                 <th scope="col">Permissão</th>
-                <th scope="col">Menu</th>
+                @if( $user_permission == "app.admin" )
+                    <th scope="col" style="text-align: center">Opções</th>
+                @endif
             </tr>        
         </thead>
         <tbody>
@@ -25,12 +27,22 @@
                     <td> {{ $user->status}}     </td>
                     <td> {{ $user->permission}} </td>
                     <td> 
-                        <form method="POST" accept-charset="UTF-8" action=" {{ route('user.destroy', ['id'=> $user->id]) }} ">
-                            {!! csrf_field() !!}
-                            <input name="_method" type="hidden" value="DELETE">
-                            <button class="btn btn-1" type="submit">Remove</button>
-                        </form>
-                        <a href=" {{ route('user.edit', $user->id) }} ">Editar</a>
+                        @if( $user_permission == "app.admin" )
+                            <div class="row">
+                                <div id="edit" style="display: show;">
+                                <a class="btn btn-primary" href=" {{ route('user.edit', $user->id) }} ">Editar</a>
+                                </div>
+                                <div style=" margin-left: 5px;">
+                                    <form method="POST" accept-charset="UTF-8" action=" {{ route('user.destroy', ['id'=> $user->id]) }} ">
+                                        {!! csrf_field() !!}
+                                        <input name="_method" type="hidden" value="DELETE">
+                                            <div id="remove">
+                                                <button class="btn btn-danger" type="submit">Remove</button>
+                                            </div>
+                                    </form>
+                                </div>
+                            </div>
+                        @endif
                     </td>
                 </tr>
             @endforeach

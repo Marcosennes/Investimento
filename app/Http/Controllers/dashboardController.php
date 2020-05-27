@@ -8,7 +8,6 @@ use App\Validators\UserValidator;
 use Illuminate\Support\Facades\Auth;
 use Exception;
 
-
 class DashboardController extends Controller
 {
     private $repository;
@@ -20,9 +19,6 @@ class DashboardController extends Controller
         $this->validator  = $validator;
     }
 
-    public function index(){
-        return view('user.dashboard');
-    }
 
     public function auth(Request $request)
     {
@@ -51,7 +47,7 @@ class DashboardController extends Controller
                 Auth::login($user);
             }
 
-            return redirect()->route('user.dashboard');
+            return redirect()->route('user.index');
         }
         catch(Exception $e)
         {
