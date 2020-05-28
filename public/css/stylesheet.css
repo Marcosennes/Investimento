@@ -196,3 +196,8 @@ section#conteudo-view form button[type="submit"]{
     background-color: #51dca6; 
     border: #51dca6;
 }
+
+.btn-yellow{
+    color: white;
+    background-color: rgb(190, 190, 18);
+}

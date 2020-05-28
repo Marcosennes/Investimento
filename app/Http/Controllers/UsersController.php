@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -13,6 +14,7 @@ use App\Repositories\UserRepository;
 use App\Validators\UserValidator;
 use \App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class UsersController.
@@ -47,6 +49,7 @@ class UsersController extends Controller
      */
     public function index()
     {
+
         $user_permission = Auth::user()->permission;
         $users = $this->repository->all();
 
@@ -97,9 +100,9 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($user_id)
     {
-        $user = $this->repository->find($id);
+        $user = $this->repository->find($user_id);
 
         return view('user.edit', [
             'user' => $user
@@ -140,7 +143,37 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        $request = $this->repository->deleteWhere(['id' => $id]);
+        //Move o usuário para a lixeira que o softDeletes cria
+        $request = $this->repository->delete($id);
+
+        //Força a exclusão somente dos usuários que estão na lixeira que o SoftDeletes acrescenta
+        $lixo = User::onlyTrashed()->forceDelete();
+
+        //Documentação do softDeletes: https://laravel.com/docs/5.4/eloquent
+
+        return redirect()->route('user.index');
+    }
+
+    public function tornarAdmin($id)
+    {
+        $user_permission = DB::table('users')
+                            ->where('id', '=', $id)
+                            ->select('permission')
+                            ->get();
+
+
+        if($user_permission[0]->permission == "app.user")
+        {
+            $manage_user_permission = DB::table('users')
+                                        ->where('id', '=', $id)
+                                        ->update(['permission' => 'app.admin']);
+        }
+        if($user_permission[0]->permission == "app.admin")
+        {
+            $manage_user_permission = DB::table('users')
+                                        ->where('id', '=', $id)
+                                        ->update(['permission' => 'app.user']);
+        }
 
         return redirect()->route('user.index');
     }

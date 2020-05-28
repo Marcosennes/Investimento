@@ -21,6 +21,7 @@ class User extends Authenticatable
     protected $fillable = [
         'cpf','name','phone','birth','gender','notes','email','password','status','permission'
     ];
+    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -46,7 +47,7 @@ class User extends Authenticatable
 
     public function setPasswordAttribute($value){
         
-        $this->attributes['password'] = env('PASSWORD_HASH') ? bcrypt($value) : $value;
+        $this->attributes['password'] = bcrypt($value);
     }
 
     

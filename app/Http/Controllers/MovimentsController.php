@@ -94,12 +94,12 @@ class MovimentsController extends Controller
         //dentro da função do join o where filtra as linhas da tabela para todos os grupos onde o usuário está
         $GLOBALS['id_user'] = $id_user;
         $user_group_list = DB::table('user_groups')
-                    ->join('groups', function($join){
-                        $join->on('user_groups.group_id', '=', 'groups.id')
-                             ->where('user_groups.user_id', '=', $GLOBALS['id_user']);
-                    })
-                    ->select('groups.id', 'groups.name')
-                    ->get();
+                            ->join('groups', function($join){
+                                $join->on('user_groups.group_id', '=', 'groups.id')
+                                    ->where('user_groups.user_id', '=', $GLOBALS['id_user']);
+                            })
+                            ->select('groups.id', 'groups.name')
+                            ->get();
 
         $product_list = DB::table('products')
                         ->select('id', 'name')

@@ -22,6 +22,11 @@ Route::post('/login', ['uses'=> 'dashboardController@auth', 'as'=>'user.login'])
 
 Route::group(['middleware' => 'auth.login'], function() {
 
+        /*
+         * O início dessa rota possui "user". Temos que ter cuidado pois existe Route::resource pra "user"
+         * Com isso, a rota "user/moviment" teve de vir antes do resource para não cair no mesmo
+         * Caso fosse declarada após o resource, seria retornado um erro
+         */
         Route::get('user/moviment', ['uses' => 'MovimentsController@index', 'as' => 'moviment.index']);
 
         Route::group(['middleware' => 'auth.permission'], function() {
@@ -29,6 +34,8 @@ Route::group(['middleware' => 'auth.login'], function() {
                 Route::get('/dashboard', ['uses'=> 'AdminController@index', 'as'=>'user.dashboard']); 
                 Route::resource('group', 'GroupsController');
                 Route::resource('user', 'UsersController');
+                //A rota precisa ser declarada por fora do resource e tem que ser get pois a variável que a mesma envia é através da url.
+                Route::get('/user/{user_id}/tornarAdmin', ['uses' => 'UsersController@tornarAdmin', 'as' => 'user.tornarAdmin']);
                 Route::resource('instituition', 'InstituitionsController');
         });
         
@@ -61,13 +68,7 @@ Route::group(['middleware' => 'auth.login'], function() {
         Route::any('moviment/search', ['uses' => 'MovimentsController@searchMoviments', 'as' => 'moviment.search']);
         Route::get('getback', ['uses' => 'MovimentsController@getback', 'as' => 'moviment.getback']);
         Route::post('getback', ['uses' => 'MovimentsController@storeGetback', 'as' => 'moviment.getback.store']);
-        /*
-         * O início dessa rota possui "user". Temos que ter cuidado pois existe Route::resource pra "user"
-         * Com isso, a rota "user/moviment" teve de vir antes do resource para não cair no mesmo
-         * Caso fosse declarada após o resource, seria retornado um erro
-         */
-        
-
+ 
         /*
          * Trabalhamos dessa forma quando temos um escopo dentro de outro
          * Use route:list pra ver como ficou o direcionamento das rotas
