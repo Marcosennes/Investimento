@@ -26,7 +26,7 @@
         <a class="hiddenanchor" id="toregister"></a>
         <a class="hiddenanchor" id="tologin"></a>
         <div id="login">
-            <form method= "post" action=" {{ route('user.login') }} ">
+            <form method= "post" action=" {{ route('dashboard.auth') }} ">
                 {!! csrf_field() !!}
                 <p>Acesse o sistema</p>
     
@@ -37,11 +37,11 @@
                     <input type="password" class="form-control" name="password" placeholder="Password">
                 </label>
                 <button type="submit" class="btn btn-primary">Submit</button>
-                <p style="font-size: 19px; margin-top: 20px;">
-                    Ainda não é registrado?
-                    <button class="btn-1 btn-primary" id="register_button">Register</button>
-                </p>    
             </form>
+            <p style="font-size: 19px; margin-top: 20px;">
+                Ainda não é registrado?
+                <button class="btn-1 btn-primary" id="register_button">Register</button>
+            </p>    
         </div>
         <div id="register" style="display: none;">
             <form id="form_register" method= "post" action=" {{ route('user.store') }} " ">
@@ -79,7 +79,7 @@
                     <span style="color: red;">A senha deve possuir pelo menos 5 caracteres</span>
                 </div>
                 <label for="exampleInputConfirmPassword">
-                    <input type="password" id="passwordsignup_confirm" class="form-control" name="password" placeholder="Password">
+                    <input type="password" id="passwordsignup_confirm" name="confirm_password" class="form-control" placeholder="Confirm Password">
                 </label>
                 <div style="display: none" id="password_confirm_cadastro_vazia">
                     <span style="color: red;">Preencha a senha</span>
@@ -115,6 +115,7 @@
 <script>
     $(document).ready(function()
     {
+        $('#passwordsignup_confirm').removeAttr('name');
         $("#register_button").click(function()
         {
             $('#register').show();

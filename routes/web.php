@@ -17,8 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', ['uses'=> 'loginController@fazerLogin', 'as' => 'loginPage']);
-Route::post('/login', ['uses'=> 'dashboardController@auth', 'as'=>'user.login']);
+Route::get('/',         ['uses' => 'loginController@fazerLogin', 'as'    => 'login.loginPage']);
+Route::post('/login',   ['uses' => 'dashboardController@auth', 'as'      =>'dashboard.auth']);
+Route::post('/',        ['uses' => 'loginController@registrar', 'as'     => 'login.register']);
+
 
 Route::group(['middleware' => 'auth.login'], function() {
 

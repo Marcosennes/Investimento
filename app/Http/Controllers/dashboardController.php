@@ -29,11 +29,12 @@ class DashboardController extends Controller
 
         try
         {
-            if(env('PASSWORD_HASH'))
-            {
-                Auth::attempt($data, false);
-            }else
-            {
+            /* 
+            //Com criptografia de senha
+            Auth::attempt($data, false);
+            */
+
+            //Sem criptografia de senha
                 $user = $this->repository->findWhere(['email' => $request->get('email')])->first();
 
                 if(!$user){
@@ -45,7 +46,6 @@ class DashboardController extends Controller
                 }
 
                 Auth::login($user);
-            }
 
             return redirect()->route('user.index');
         }

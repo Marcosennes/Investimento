@@ -29,18 +29,16 @@
                     <td> 
                         @if( $user_permission == "app.admin" )
                             <div class="row">
-                                <div id="edit">
                                     <a class="btn btn-primary" href=" {{ route('user.edit', $user->id) }} ">Editar</a>
-                                </div>
                                 @if($user->permission == "app.user")
-                                <div id="tornar_admin" style=" margin-left: 5px;">
-                                    <a class="btn btn-yellow" href=" {{ route('user.tornarAdmin', ['id' => $user->id]) }} ">Tornar Admin</a>
-                                </div>
+                                    <div id="tornar_admin" style=" margin-left: 5px;">
+                                        <a class="btn btn-yellow" href=" {{ route('user.tornarAdmin', ['id' => $user->id]) }} ">Tornar Admin</a>
+                                    </div>
                                 @endif
                                 @if($user->permission == "app.admin")
-                                <div id="tornar_admin" style=" margin-left: 5px;">
-                                    <a class="btn btn-yellow" href=" {{ route('user.tornarAdmin', ['id' => $user->id]) }} ">Retirar Admin</a>
-                                </div>
+                                    <div id="tornar_admin" style=" margin-left: 5px;">
+                                        <a class="btn btn-yellow" href=" {{ route('user.tornarAdmin', ['id' => $user->id]) }} ">Retirar Admin</a>
+                                    </div>      
                                 @endif
                                 <div style=" margin-left: 5px;">
                                     <form method="POST" accept-charset="UTF-8" action=" {{ route('user.destroy', ['id'=> $user->id]) }} ">

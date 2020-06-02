@@ -19,12 +19,12 @@ class CheckPermission
 
         if(!Auth::check())
         {
-            return redirect()->route('loginPage');
+            return redirect()->route('login.loginPage');
         }
 
         if(Auth::user()->permission != 'app.admin')
         {
-            return redirect()->route('loginPage');
+            return redirect()->route('login.loginPage');
         }
 
         return $next($request);
