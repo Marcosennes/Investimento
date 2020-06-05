@@ -21,9 +21,9 @@ class loginController extends Controller
         return view('user.login');
     }
 
-    public function registrar(UserCreateRequest $request){
-
-        $request = $this->service->store($request->all());
+    public function registrar(UserCreateRequest $request)
+    {
+        $register = $this->service->store($request->all());
         /* $usuario = $request['success'] ? $request['data'] : null; */ 
 
         session()->flash('success', [
@@ -33,6 +33,8 @@ class loginController extends Controller
 
         $user = $this->repository->findWhere(['email' => $request->get('email')])->first();
         Auth::login($user);
+        
+
         return redirect()->route('user.index');
     }
 }

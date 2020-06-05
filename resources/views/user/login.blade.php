@@ -47,7 +47,7 @@
             </h3>    
         </div>
         <div id="register" style="display: none;">
-            <form id="form_register" method= "post" action=" {{ route('user.store') }} " ">
+            <form id="form_register" method= "post" action=" {{ route('login.register') }} ">
                 {!! csrf_field() !!}
                 <label for="cpfInputCpf">
                    <input type="text" id="cpf" class="form-control" name="cpf" aria-describedby="cpfHelp" placeholder="CPF">
@@ -87,7 +87,9 @@
                 <div style="display: none" id="password_confirm_cadastro_vazia">
                     <span style="color: red;">Preencha a senha</span>
                 </div>
+
                 <button type="submit" style="width: 226px;" class="btn btn-1">Cadastrar</button>
+                
                 <div style="display: none" id="senhas_diferentes">
                     <span style="color: red;">As senhas informadas não correspondem</span>
                 </div>
