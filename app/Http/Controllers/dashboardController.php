@@ -39,6 +39,8 @@ class DashboardController extends Controller
                 if(!$user){
                     throw new Exception("Email informado é inválido.");
                 }
+                //dd($request->get('password'), $user->password);
+                //dd(password_verify($request->get('password'), $user->password));
                 if(password_verify($request->get('password'), $user->password))
                 {
                     Auth::login($user);

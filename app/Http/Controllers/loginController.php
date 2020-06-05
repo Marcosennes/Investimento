@@ -23,6 +23,8 @@ class loginController extends Controller
 
     public function registrar(UserCreateRequest $request)
     {
+        //dd($request->all(), $data);
+
         $register = $this->service->store($request->all());
         /* $usuario = $request['success'] ? $request['data'] : null; */ 
 

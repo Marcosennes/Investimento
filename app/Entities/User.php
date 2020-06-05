@@ -45,12 +45,6 @@ class User extends Authenticatable
        return $this->hasmany(Moviment::class);
    } 
 
-    public function setPasswordAttribute($value){
-        
-        $this->attributes['password'] = password_hash($value, PASSWORD_DEFAULT);
-    }
-
-    
     public function getFormattedCpfAttribute(){
 
         $cpf = $this->attributes['cpf'];

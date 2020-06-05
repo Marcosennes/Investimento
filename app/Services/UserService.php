@@ -19,11 +19,21 @@ class UserService{
         $this->validator = $validator;
     }
 
-    public function store($data){
-        try{
+    public function store($data)
+    {
+        $aux_data = [
+            'cpf'       => $data['cpf'],
+            'name'      => $data['name'],
+            'phone'     => $data['phone'],
+            'email'     => $data['email'],
+            'password'  => password_hash($data['password'], PASSWORD_DEFAULT),
+        ];
+
+        try
+        {
 
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
-            $usuario = $this->repository->create($data);
+            $usuario = $this->repository->create($aux_data);
 
             return [
                 'success'  => 'true',

@@ -1,4 +1,13 @@
+<?php
+    use Illuminate\Support\Facades\Auth;
+?>        
 <nav id="principal">
+    <div class="sidebar-header">
+    <?php
+    echo('Olá, ' . Auth::user()->name);
+    ?>
+    <h3></h3>
+    </div>
     <ul class="lista">
         <li class="lista">
             <a id="a1" class="amenu" href="  {{ route('user.index') }}  ">
@@ -19,8 +28,7 @@
             </a>
         </li>
         <?php
-        use Illuminate\Support\Facades\Auth;
-        $userPermission = Auth::user()->permission;
+            $userPermission = Auth::user()->permission;
         
         ?>
         @if($userPermission == "app.admin")
@@ -67,3 +75,4 @@
         </li>
     </ul>
 </nav>
+    
