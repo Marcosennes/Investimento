@@ -84,11 +84,26 @@ section#conteudo-view form label input{
     font: 1em 'Arial';
 }
 section#conteudo-view form button[type="submit"]{
-    background: #00ff9c;
+    background: #444444;
+    /* background: #00ff9c; */
     text-align: center;
     font: 1em 'Fredoka One', cursive; 
     color: #f9f9f9;
     width: 60%;
+    float: right;  /* Alinhamento */
+}
+
+.botaoRegister{
+    width: 100%;
+    height: 40px;
+    border-radius: 20px;
+    border: 2px solid #444444;
+    background: #444444;
+    /* background: #00ff9c; */
+    text-align: center;
+    font: .8em 'Fredoka One', cursive; 
+    color: #f9f9f9;
+    width: 30%;
     float: right;  /* Alinhamento */
 }
 

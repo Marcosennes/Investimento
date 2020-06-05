@@ -38,10 +38,13 @@
                 </label>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-            <p style="font-size: 19px; margin-top: 20px;">
+            @if(session('wrongPassword'))
+                <h3 style="color: red;">{{ session('wrongPassword')['messages'] }}</h3>
+            @endif
+            <h3 style="font-size: 19px; margin-top: 20px;">
                 Ainda não é registrado?
-                <button class="btn-1 btn-primary" id="register_button">Register</button>
-            </p>    
+                <button class="btn btn-primary botaoRegister" id="register_button">Register</button>
+            </h3>    
         </div>
         <div id="register" style="display: none;">
             <form id="form_register" method= "post" action=" {{ route('user.store') }} " ">

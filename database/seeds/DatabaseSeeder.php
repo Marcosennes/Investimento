@@ -22,6 +22,16 @@ class DatabaseSeeder extends Seeder
             'password'   => env('PASSWORD_HASH') ? bcrypt('123321') : '123321',
             'permission' => 'app.admin',
         ]);
+        User::create([
+            'cpf'        => '14575483496',
+            'name'       => 'Paulo',
+            'phone'      => '359438865',
+            'birth'      => '1964-03-03',
+            'gender'     => 'M',
+            'email'      => 'paulo@gmail.com',
+            'password'   => '123321',
+            'permission' => 'app.admin',
+        ]);
 
         // $this->call(UsersTableSeeder::class);
 
