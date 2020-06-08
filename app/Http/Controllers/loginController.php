@@ -28,15 +28,20 @@ class loginController extends Controller
         $register = $this->service->store($request->all());
         /* $usuario = $request['success'] ? $request['data'] : null; */ 
 
-        session()->flash('success', [
-            'success'  => $request['success'],
-            'messages' => $request['messages']
-        ]);
+        if($register['confirm_validation'] == false)
+        {
+            session()->flash('email_fail', [
+                'messages' => $register['messages']
+            ]);            
 
-        $user = $this->repository->findWhere(['email' => $request->get('email')])->first();
-        Auth::login($user);
-        
-
-        return redirect()->route('user.index');
+            return redirect()->route('login.loginPage');
+        }
+        else
+        {
+            $user = $this->repository->findWhere(['email' => $request->get('email')])->first();
+            Auth::login($user);
+            
+            return redirect()->route('user.index');
+        }
     }
 }

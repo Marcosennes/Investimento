@@ -13,26 +13,15 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         User::create([
-            'cpf'        => '17585483496',
-            'name'       => 'Maria',
-            'phone'      => '359998865',
-            'birth'      => '1975-03-03',
+            'cpf'        => '17498483496',
+            'name'       => 'Janir',
+            'phone'      => '359428865',
+            'birth'      => '1978-03-03',
             'gender'     => 'F',
-            'email'      => 'maria@gmail.com',
-            'password'   => env('PASSWORD_HASH') ? bcrypt('123321') : '123321',
+            'email'      => 'janir@gmail.com',
+            'password'   => password_hash('123321', PASSWORD_DEFAULT),
             'permission' => 'app.admin',
         ]);
-        User::create([
-            'cpf'        => '14575483496',
-            'name'       => 'Paulo',
-            'phone'      => '359438865',
-            'birth'      => '1964-03-03',
-            'gender'     => 'M',
-            'email'      => 'paulo@gmail.com',
-            'password'   => '123321',
-            'permission' => 'app.admin',
-        ]);
-
         // $this->call(UsersTableSeeder::class);
 
         // php artisan db:seed comando para efetivar a seed

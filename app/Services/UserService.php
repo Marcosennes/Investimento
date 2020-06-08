@@ -6,6 +6,7 @@ use App\Repositories\UserRepository;
 use App\Validators\UserValidator;
 use Exception;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 use Prettus\Validator\Contracts\ValidatorInterface;
 
 class UserService{
@@ -29,17 +30,43 @@ class UserService{
             'password'  => password_hash($data['password'], PASSWORD_DEFAULT),
         ];
 
+        // Dessa forma se a busca retornar sem nenhum usuário com o mesmo email, o resultado não é null
+        /*
+        $email_verification = DB::table('users')
+                                ->where('email', '=', $data['email'])
+                                ->select('id')
+                                ->get();
+        */
+
+        $email_verification = $this->repository->findWhere(['email' => $data['email']])->first();
+        $cpf_verification = $this->repository->findWhere(['cpf'   => $data['cpf']])->first();
+
         try
         {
-
-            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
-            $usuario = $this->repository->create($aux_data);
-
-            return [
-                'success'  => 'true',
-                'messages' => "Usuário cadastrado",
-                'data'=> $usuario,
-            ];
+            if($email_verification)
+            {
+                return [
+                    'messages'              => "Email já cadastrado no sistema",
+                    'confirm_validation'    => false,
+                ];
+            }
+            else if($cpf_verification)
+            {
+                return [
+                    'messages'              => "CPF já cadastrado no sistema",
+                    'confirm_validation'    => false,
+                ];
+            }
+            else
+            {
+                $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
+                $usuario = $this->repository->create($aux_data);
+    
+                return [
+                    'messages'              => "Usuário cadastrado",
+                    'confirm_validation'    => true,
+                ];
+            }
         }
         catch(Exception $e){
 

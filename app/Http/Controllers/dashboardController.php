@@ -36,25 +36,33 @@ class DashboardController extends Controller
                 //Auth::attempt($data, false);
                 $user = $this->repository->findWhere(['email' => $request->get('email')])->first();
                 
-                if(!$user){
-                    throw new Exception("Email informado é inválido.");
-                }
-                //dd($request->get('password'), $user->password);
-                //dd(password_verify($request->get('password'), $user->password));
-                if(password_verify($request->get('password'), $user->password))
+                if(!$user)
                 {
-                    Auth::login($user);
-                    return redirect()->route('user.index');
-                }
-                else
-                {
-                    session()->flash('wrongPassword', [
-                        'messages' => "A senha informada não corresponde ao e-mail cadastrado no sistema",
+                    session()->flash('none_user', [
+                        'messages' => "Usuário não existe no sistema"
                     ]);
 
                     return redirect()->route('login.loginPage');
                 }
-            
+                else{
+
+                    //dd($request->get('password'), $user->password);
+                    //dd(password_verify($request->get('password'), $user->password));
+                    if(password_verify($request->get('password'), $user->password))
+                    {
+                        Auth::login($user);
+                        
+                        return redirect()->route('user.index');
+                    }
+                    else
+                    {
+                        session()->flash('wrongPassword', [
+                            'messages' => "A senha informada não corresponde ao e-mail cadastrado no sistema",
+                        ]);
+
+                        return redirect()->route('login.loginPage');
+                    }
+                }
 
             //Sem criptografia de senha
                 /*

@@ -31,15 +31,21 @@
                 <p>Acesse o sistema</p>
     
                 <label for="exampleInputEmail1">
-                   <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Email">
+                   <input type="email" class="form-control" required name="email" aria-describedby="emailHelp" placeholder="Email">
                 </label>
                 <label for="exampleInputPassword1">
-                    <input type="password" class="form-control" name="password" placeholder="Password">
+                    <input type="password" class="form-control" required name="password" placeholder="Password">
                 </label>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
             @if(session('wrongPassword'))
                 <h3 style="color: red;">{{ session('wrongPassword')['messages'] }}</h3>
+            @endif
+            @if(session('email_fail'))
+                <h3 style = "color: red;">{{ session('email_fail')['messages'] }}</h3>
+            @endif
+            @if(session('none_user'))
+                <h3 style = "color: red;">{{ session('none_user')['messages'] }}</h3>
             @endif
             <h3 style="font-size: 19px; margin-top: 20px;">
                 Ainda não é registrado?
@@ -50,39 +56,39 @@
             <form id="form_register" method= "post" action=" {{ route('login.register') }} ">
                 {!! csrf_field() !!}
                 <label for="cpfInputCpf">
-                   <input type="text" id="cpf" class="form-control" name="cpf" aria-describedby="cpfHelp" placeholder="CPF">
+                   <input type="text" id="cpf" class="form-control" required name="cpf" aria-describedby="cpfHelp" placeholder="CPF">
                 </label>
                 <div style="display: none" id="cpf_incorreto">
                     <span style="color: red;">CPF deve possuir 11 dígitos</span>
                 </div>
                 <label for="nameInputName">
-                    <input type="text" id="usernamesignup" class="form-control" name="name" placeholder="Name">
+                    <input type="text" id="usernamesignup" class="form-control" required name="name" placeholder="Name">
                 </label>
                 <div style="display: none" id="nome_cadastro_vazio">
                     <span style="color: red;">Preencha o nome</span>
                 </div>
                 <br>
                 <label for="phoneInputPhone">
-                    <input type="text" id="phone" class="form-control" name="phone" placeholder="Phone">
+                    <input type="text" id="phone" class="form-control" required name="phone" placeholder="Phone">
                 </label>
                 <div style="display: none" id="phone_incorreto">
                     <span style="color: red;">Deve possuir somente números</span>
                 </div>
                 <label for="email">
-                    <input type="email" id="emailsignup" class="form-control" name="email" placeholder="Email">
+                    <input type="email" id="emailsignup" class="form-control" required name="email" placeholder="Email">
                 </label>
                 <div style="display: none" id="email_cadastro_vazio">
                     <span style="color: red;">Preencha o E-mail</span>
                 </div>
                 <br>
                 <label for="exampleInputPassword">
-                    <input type="password" class="form-control" name="password" placeholder="Password">
+                    <input type="password" class="form-control" required name="password" placeholder="Password">
                 </label>
                 <div style="display: none" id="password_cadastro_vazia">
                     <span style="color: red;">A senha deve possuir pelo menos 5 caracteres</span>
                 </div>
                 <label for="exampleInputConfirmPassword">
-                    <input type="password" id="passwordsignup_confirm" name="confirm_password" class="form-control" placeholder="Confirm Password">
+                    <input type="password" class="form-control" required id="passwordsignup_confirm" name="confirm_password" placeholder="Confirm Password">
                 </label>
                 <div style="display: none" id="password_confirm_cadastro_vazia">
                     <span style="color: red;">Preencha a senha</span>
@@ -155,13 +161,12 @@
             $('#password_confirm_cadastro_vazia').hide();
             $('#senhas_diferentes').hide();
     
-            if (oCadastrar.nome_cadastro == '' || oCadastrar.email_cadastro == '' || oCadastrar.password_cadastro.length < 5 ||
-                oCadastrar.password_cadastro == "" || oCadastrar.password_confirmacao_cadastro == "" || oCadastrar.password_cadastro !=
-                oCadastrar.password_confirmacao_cadastro) {
+            if (oCadastrar.nome_cadastro        == '' || oCadastrar.email_cadastro                  == '' || oCadastrar.password_cadastro.length    < 5 ||
+                oCadastrar.password_cadastro    == "" || oCadastrar.password_confirmacao_cadastro   == "" || oCadastrar.password_cadastro           != oCadastrar.password_confirmacao_cadastro)
+                {
                 if (oCadastrar.nome_cadastro == "") {
                     $('#nome_cadastro_vazio').show();
                     $('#usernamesignup').focus();
-                    die
                 }
                 if (oCadastrar.email_cadastro == "") {
                     $('#email_cadastro_vazio').show();
@@ -169,19 +174,24 @@
                         $('#emailsignup').focus();
                     }
                 }
-                if (oCadastrar.password_cadastro.length < 5) {
+                if (oCadastrar.password_cadastro.length < 5)
+                {
                     $('#password_cadastro_vazia').show();
+
                     if (oCadastrar.nome_cadastro != "" && oCadastrar.email_cadastro != "" && oCadastrar.password_cadastro == "") {
                         $('#passwordsignup').focus();
                     }
                 }
-                if (oCadastrar.password_confirmacao_cadastro.length < 5) {
+                if (oCadastrar.password_confirmacao_cadastro.length < 5)
+                {
                     $('#password_confirm_cadastro_vazia').show();
+
                     if (oCadastrar.nome_cadastro != "" && oCadastrar.email_cadastro != "" && (oCadastrar.password_cadastro != "" || oCadastrar.password_cadastro.length >= 5) && oCadastrar.password_confirmacao_cadastro == "") {
                         $('#passwordsignup_confirm').focus();
                     }
                 }
-                if (oCadastrar.password_cadastro != "" && oCadastrar.password_confirmacao_cadastro != "" && oCadastrar.password_cadastro != oCadastrar.password_confirmacao_cadastro) {
+                if (oCadastrar.password_cadastro != "" && oCadastrar.password_confirmacao_cadastro != "" &&
+                    oCadastrar.password_cadastro != oCadastrar.password_confirmacao_cadastro) {
                     $('#senhas_diferentes').show();
                 }
             }
