@@ -86,10 +86,21 @@ class Moviment extends Model implements Transformable
         $id_user = Auth::id();
 
         $moviment_list = $this
-        ->where('user_id', '=', $id_user)
-        ->select('*')
-        ->Paginate(11);
+                            ->where('user_id', '=', $id_user)
+                            ->select('*')
+                            ->Paginate(11);        
+
+        foreach($moviment_list as $moviment)
+        {
+            $produto = Product::withTrashed()
+                            ->where('id', '=', $moviment->attributes['product_id'])
+                            ->select('name')
+                            ->get();
+
+            $moviment->attributes['product_name'] = $produto[0]->attributes['name'];
+        }
 
         return $moviment_list;
     }
+
 }

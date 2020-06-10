@@ -31,7 +31,7 @@
                     <th scope="row">    {{ $moviment->created_at->format("d/m/Y")}}                 </th>
                     <th scope="row">    {{ $moviment->created_at->format("H:i")}}                 </th>
                     <td>                {{ $moviment->type == 1 ? "Aplicação" : "Resgate"}}               </td>
-                    <td>                {{ $moviment->product->name}}               </td>
+                    <td>                {{ $moviment->product_name}}               </td>
                     <td>                {{ $moviment->group->name}}               </td>
                     <td>             R$ {{ $moviment->value }}        </td>
     

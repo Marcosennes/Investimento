@@ -147,8 +147,15 @@ class UsersController extends Controller
         $request = $this->repository->delete($id);
 
         //Força a exclusão somente dos usuários que estão na lixeira que o SoftDeletes acrescenta
-        $lixo = User::onlyTrashed()->forceDelete();
+        //$lixo = User::onlyTrashed()->forceDelete();
 
+        /*
+         * O softDeletes é necessário nesse projeto pois os objetos a serem "excluídos" possuem um histórico
+         * no sistema. Um exemplo são as movimentações.  Se um usuário investe em um produto e este deixa ded exixtir?
+         * O dinheiro seria perdido? E se ele quiser saber seu histórico de transações e o histórico não conseguir buscar
+         * informações de um certo produto porque ele foi removido?
+         */
+        
         //Documentação do softDeletes: https://laravel.com/docs/5.4/eloquent
 
         return redirect()->route('user.index');

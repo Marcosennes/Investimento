@@ -19,7 +19,16 @@ class User extends Authenticatable
     public $timestamps = true;
     protected $table = 'users';
     protected $fillable = [
-        'cpf','name','phone','birth','gender','notes','email','password','status','permission'
+        'cpf',
+        'name',
+        'phone',
+        'birth',
+        'gender',
+        'notes',
+        'email',
+        'password',
+        'status',
+        'permission'
     ];
     protected $dates = ['deleted_at'];
 

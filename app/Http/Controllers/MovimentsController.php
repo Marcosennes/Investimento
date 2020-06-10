@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Entities\Moviment;
 use App\Entities\Product;
+use App\Entities\UserGroups;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -70,44 +71,81 @@ class MovimentsController extends Controller
 
         
         /*
-        //faço um join da tabela users com user_groups
-        $teste = DB::table('users')
-        ->join('user_groups', 'user_id', 'users.id')
-        ->select('users.id', 'user_groups.group_id')
-        ->get();
+         * faço um join da tabela users com user_groups
+         * $teste = DB::table('users')
+         *              ->join('user_groups', 'user_id', 'users.id')
+         *              ->select('users.id', 'user_groups.group_id')
+         *              ->get();
+         *
+         * faço um join da tabela user_groups com groups
+         * faço um join da tabela user_groups com users
+         * No final as tres tabelas viram uma só. o campo name de users.name e groups.name se sobrepoem dependendo do select
+         * se eu por no select 'users.name', o campo name será o nome do usuário
+         * se eu por no select 'groups.name', o campo name será o nome do grupo
+         * 
+         * $teste2 = DB::table('user_groups')
+         *              ->join('groups', 'groups.id', 'user_groups.group_id')
+         *              ->join('users', 'users.id', 'user_groups.user_id')
+         *              ->select('*')
+         *              ->get();
+         */
         
-        //faço um join da tabela user_groups com groups
-        //faço um join da tabela user_groups com users
-        //No final as tres tabelas viram uma só. o campo name de users.name e groups.name se sobrepoem dependendo do select
-        //se eu por no select 'users.name', o campo name será o nome do usuário
-        //se eu por no select 'groups.name', o campo name será o nome do grupo
-        $teste2 = DB::table('user_groups')
-        ->join('groups', 'groups.id', 'user_groups.group_id')
-        ->join('users', 'users.id', 'user_groups.user_id')
-        ->select('*')
-        ->get();
-        */
+        $user       = Auth::user();
+        $id_user    = Auth::id();
+
+        /*
+         * faço um join da tabela user_groups com groups enviando na função o id do usuário autenticado no sistema
+         * dentro da função do join o where filtra as linhas da tabela para todos os grupos onde o usuário está
+         */
         
-        $user   = Auth::user();
-        $id_user     = Auth::id();
-        //faço um join da tabela user_groups com groups enviando na função o id do usuário autenticado no sistema
-        //dentro da função do join o where filtra as linhas da tabela para todos os grupos onde o usuário está
         $GLOBALS['id_user'] = $id_user;
-        $user_group_list = DB::table('user_groups')
-                            ->join('groups', function($join){
+
+        $user_group_list = UserGroups::join('groups', function($join)
+                            {
                                 $join->on('user_groups.group_id', '=', 'groups.id')
                                     ->where('user_groups.user_id', '=', $GLOBALS['id_user']);
                             })
                             ->select('groups.id', 'groups.name')
                             ->get();
 
-        $product_list = DB::table('products')
-                        ->select('id', 'name')
-                        ->get();
+        /*
+         * //Forma para acessar os dados que vieram da lista $user_group_list
+         *  foreach($user_group_list as $user_group)
+         *  {
+         *      dd($user_group->name);
+         *  }
+         */
+
+        $product_list = Product::select('id', 'name')
+                                ->get();
 
         return view('moviment.application', [
-            'user_group_list'    => $user_group_list,
-            'product_list'  => $product_list,
+            'user_group_list'   => $user_group_list,
+            'product_list'      => $product_list,
+        ]);
+    }
+
+    public function getback(){
+        
+        $user       = Auth::user();
+        $id_user    = Auth::id();
+
+        $GLOBALS['id_user'] = $id_user;
+
+        $user_group_list = UserGroups::join('groups', function($join){
+                                    $join->on('user_groups.group_id', '=', 'groups.id')
+                                         ->where('user_groups.user_id', '=', $GLOBALS['id_user']);})
+                                    ->select('groups.id', 'groups.name')
+                                    ->get();
+
+        $product_list   =   Product::select('id', 'name')
+                                    ->get();
+
+                        
+        return view('moviment.getback', [
+
+            'user_group_list'   => $user_group_list,
+            'product_list'      => $product_list,
         ]);
     }
 
@@ -129,31 +167,6 @@ class MovimentsController extends Controller
         ]);
     
         return redirect()->route('moviment.application');
-    }
-
-    public function getback(){
-        
-        $user   = Auth::user();
-        $id_user     = Auth::id();
-
-        $GLOBALS['id_user'] = $id_user;
-        $user_group_list = DB::table('user_groups')
-                    ->join('groups', function($join){
-                        $join->on('user_groups.group_id', '=', 'groups.id')
-                             ->where('user_groups.user_id', '=', $GLOBALS['id_user']);
-                    })
-                    ->select('groups.id', 'groups.name')
-                    ->get();
-
-        $product_list = DB::table('products')
-                        ->select('id', 'name')
-                        ->get();
-
-                        
-        return view('moviment.getback', [
-            'user_group_list'    => $user_group_list,
-            'product_list'  => $product_list,
-        ]);
     }
 
     public function storeGetBack(Request $request){
@@ -236,7 +249,7 @@ class MovimentsController extends Controller
     public function searchMoviments(Request $request, Moviment $moviment)
     {
         $moviment_list = $moviment->search($request->all(), 10);
-
+        
         return view('moviment.all', [
             'moviment_list' => $moviment_list,
             'dataForm'      => $request->except('_token'),
