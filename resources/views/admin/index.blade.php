@@ -83,9 +83,6 @@
                             </div>
                             <div class="row d-flex flex-column">
                                 @include('templates.formulario.select', ['label' => "Responsável",     'select' => 'user_id',         'data' => $user_list,         'name_select' => 'user_id',     'attributes' => ['placeholder' => "User"]])
-                            </div>
-                            <div class="row d-flex flex-column">
-                                @include('templates.formulario.select', ['label' => "Instituição", 'select' => 'instituition_id', 'data' => $instituition_list, 'name_select' => 'instituition_id', 'attributes' => ['placeholder' => "Instituição"]])
                                 <button class="btn btn-1" style="width: 100%" type="submit">Cadastrar</button>
                             </div>
                         </form>     

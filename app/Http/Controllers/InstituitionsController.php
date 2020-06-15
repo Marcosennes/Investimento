@@ -83,16 +83,6 @@ class InstituitionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $user_permission = Auth::user()->permission;
-        $instituition = $this->repository->find($id);
-        return view('instituitions.show',[
-
-            'instituition'      => $instituition,
-            'user_permission'   => $user_permission,
-        ]);
-    }
 
     /**
      * Show the form for editing the specified resource.

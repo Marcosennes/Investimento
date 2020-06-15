@@ -3,7 +3,7 @@
 @section('conteudo-view')
 
 <div class="col-md-6">
-    <h3>Cadastrar nova instituição</h3>
+    <h3>Editar instituição</h3>
     <form method="post" action=" {{ route('instituition.update', ['id' => $instituition->id]) }} ">
         {!! csrf_field() !!}
         <!--Campo que especifica o tipo de envio (verbon http) do formulário: PUT. É necessário para que o envio aconteça-->            

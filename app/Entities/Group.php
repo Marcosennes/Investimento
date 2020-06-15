@@ -59,13 +59,6 @@ class Group extends Model implements Transformable
         return $this->belongsToMany(User::class, 'user_groups');    //tabela que gera o apoio pra esse relacionamento
     }
 
-    public function instituition(){
-
-        //Relacionamento N:1
-        return $this->belongsTo(Instituition::class);
-
-    }
-
     public function moviments()
     {
         return $this->hasMany(Moviment::class);

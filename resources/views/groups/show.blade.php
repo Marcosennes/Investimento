@@ -4,7 +4,6 @@
     
 <header>
 <h1>Nome do grupo: {{ $group->name }}</h1>
-<h2>Instituição: {{ $group->instituition->name }}</h2> <!-- pega a variável name de instituição através do relacionamento entre grupo e instituição -->
 <h2>Responsável: {{ $group->user->name }}</h2>
 </header>
 <form method="post" action=" {{ route('group.user.store', ['id'=> $group->id]) }} ">

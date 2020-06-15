@@ -26,7 +26,6 @@
                                 </div>    
                             @endif
                         </form>
-                    <a href="{{ route('instituition.show',          $inst->id) }}">Detalhes</a>
                     <a href="{{ route('instituition.product.index', $inst->id) }}">produtos</a>
                     @if( $user_permission == "app.admin" )
                         <div id="edit" style="display: show;">

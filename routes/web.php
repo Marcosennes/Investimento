@@ -81,7 +81,9 @@ Route::group(['middleware' => 'auth.login'], function() {
         Route::post('group/{group_id}/user', ['as' => 'group.user.store', 'uses' => 'GroupsController@userStore']);
         
         Route::get('/logout', function(){
+                
                 Auth::logout();
+
                 return view('user.login');
         })->name('logout');
 });
