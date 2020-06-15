@@ -19,7 +19,7 @@
     <div class="col-md-12">
         <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-6" style="background-color: aqua">
-                <form method= "post" action=" {{ route('user.store') }} " ">
+                <form method= "post" action=" {{ route('user.store') }} ">
                     {!! csrf_field() !!}
                     <h3 style="color: white">Cadastrar novo usuário</h3>
                     <div class="container">

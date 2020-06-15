@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entities\User;
+use App\Entities\Group;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -62,13 +63,35 @@ class GroupsController extends Controller
      */
     public function index()
     {
-        $user_permission = Auth::user()->permission;
-        $groups = $this->repository->all();
+        $user_permission    = Auth::user()->permission;
+        $groups             = $this->repository->all();
+        $type_page          = "index";
 
         return view('groups.index', [
-            'groups' => $groups,
-            'user_permission' => $user_permission,
+            'user_permission'   => $user_permission,
+            'groups'            => $groups,
+            'type_page'         => $type_page,
         ]);
+    }
+
+    public function trash()
+    {
+        $user_permission    = Auth::user()->permission;
+        $trashed_groups     = Group::onlyTrashed()->get();
+        $type_page          = "trash";
+
+        return view('groups.index', [
+            'user_permission'   => $user_permission,
+            'groups'            => $trashed_groups,
+            'type_page'         => $type_page,
+        ]);
+    }
+
+    public function restore($id)
+    {
+        Group::onlyTrashed()->where('id', $id)->restore();
+
+    return redirect()->route('group.index');
     }
 
     /**
@@ -135,13 +158,11 @@ class GroupsController extends Controller
      */
     public function edit($id)
     {
-        $group = $this->repository->find($id);
-        $user_list          = DB::table('users')->select('id', 'name')->get();
-        $instituition_list  = DB::table('instituitions')->select('id', 'name')->get(); ;
+        $group      = $this->repository->find($id);
+        $user_list  = User::select('id', 'name')->get();
         return view('groups.edit', [
             'group'             => $group,
             'user_list'         => $user_list,
-            'instituition_list' => $instituition_list,
         ]);
     }
 
@@ -157,6 +178,7 @@ class GroupsController extends Controller
      */
     public function update($id, Request $request)
     {
+
         $request = $this->service->update($request->all(), $id);
         /* $usuario = $request['success'] ? $request['data'] : null; */ 
 

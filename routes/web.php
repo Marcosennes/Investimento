@@ -35,6 +35,8 @@ Route::group(['middleware' => 'auth.login'], function() {
 
                 Route::get('/dashboard', ['uses'=> 'AdminController@index', 'as'=>'user.dashboard']); 
                 Route::resource('group', 'GroupsController');
+                Route::get('/trashed_groups', ['uses' => 'GroupsController@trash', 'as' => 'group.trash']);
+                Route::get('group/{group_id}/restore', ['uses' => 'GroupsController@restore', 'as' => 'group.restore']);
                 Route::resource('user', 'UsersController');
                 //A rota precisa ser declarada por fora do resource e tem que ser get pois a variável que a mesma envia é através da url.
                 Route::get('/user/{user_id}/tornarAdmin', ['uses' => 'UsersController@tornarAdmin', 'as' => 'user.tornarAdmin']);
@@ -79,7 +81,6 @@ Route::group(['middleware' => 'auth.login'], function() {
         Route::resource('instituition.product', 'ProductsController'); 
                 
         Route::post('group/{group_id}/user', ['as' => 'group.user.store', 'uses' => 'GroupsController@userStore']);
-        
         Route::get('/logout', function(){
                 
                 Auth::logout();

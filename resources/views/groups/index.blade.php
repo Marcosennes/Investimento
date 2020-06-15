@@ -1,15 +1,21 @@
 @extends('templates.master')
 
 @section('conteudo-view')
-<div class="row">
-    <div class="col-md-3">
-    </div>
-    <div class="col-md-6" style="float: ">
-    </div>
-</div>
 <div class="col-md-12">
+    @if( $user_permission == "app.admin" )
+        <div class="col-12 col-lg-2 row d-flex flex-colum n pb-3" id="lixeira">
+            @if($type_page == "index")
+                <a href="{{ route('group.trash') }}" class="btn btn-1" type="submit">Lixeira</a>
+            @endif
+            @if($type_page == "trash")
+                <a href="{{ route('group.index') }}" class="btn btn-1" type="submit">Grupos</a>
+            @endif
+        </div>
+    @endif
 
-    @include('groups.list', ['group_list' => $groups, 'user_permission' => $user_permission])
+    @include('groups.list', [   'group_list'        => $groups, 
+                                'user_permission'   => $user_permission,
+                                'type_page'         => $type_page])
 
 
 </div>

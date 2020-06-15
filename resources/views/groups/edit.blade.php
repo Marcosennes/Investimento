@@ -16,7 +16,13 @@
         <br>
         <label for="responsavel">
             <h3>Nome do responsável:</h3>
-            @include('templates.formulario.select', ['label' => "Usuário",     'select' => 'user_id',         'data' => $user_list,         'name_select' => 'user_id',     'attributes' => ['placeholder' => "User"]])
+            @include('templates.formulario.select', [   
+                                                        'label' => "Usuário",
+                                                        'select' => 'user_id',
+                                                        'data' => $user_list,
+                                                        'name_select' => 'user_id',
+                                                        'attributes' => ['placeholder' => "User"]
+                                                    ])
         </label>
         <button class="btn btn-1" type="submit">Atualizar</button>
     </form> 

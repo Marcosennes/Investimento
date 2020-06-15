@@ -19,20 +19,25 @@
                 <td>             R$ {{ number_format($group->total_value, 2, ',', '.')}}        </td>
                 <td>                {{ $group->user->name}}         </td>
                 <td> 
-                    <form method="POST" accept-charset="UTF-8" action=" {{ route('group.destroy', ['id'=> $group->id]) }} ">
-                        {!! csrf_field() !!}
-                        <input name="_method" type="hidden" value="DELETE">
-                        @if( $user_permission == "app.admin" )
-                            <div id="remove" style="display: show;">
+                    @if( $user_permission == "app.admin" )
+                        @if($type_page == "index")
+                            <form method="POST" action=" {{ route('group.destroy', ['id'=> $group->id]) }} "  accept-charset="UTF-8">
+                                {!! csrf_field() !!}
+                                <input name="_method" type="hidden" value="DELETE">
                                 <button class="btn btn-1" type="submit">Remove</button>
+                            </form>
+                        @endif
+                        @if($type_page == "trash")
+                            <a href="{{ route('group.restore', $group->id) }}" class="btn btn-1" type="submit">Restaurar</a>
+                        @endif
+                    @endif
+                    @if( $user_permission == "app.admin" )
+                        @if($type_page == "index")
+                            <div id="edit" style="display: show;">
+                                <a href="{{ route('group.show', $group->id) }}">Detalhes</a>
+                                <a href="{{ route('group.edit', $group->id) }}">Editar</a>
                             </div>
                         @endif
-                    </form>
-                    @if( $user_permission == "app.admin" )
-                    <div id="edit" style="display: show;">
-                        <a href="{{ route('group.show', $group->id) }}">Detalhes</a>
-                        <a href="{{ route('group.edit', $group->id) }}">Editar</a>
-                    </div>
                     @endif
                 </td>
             </tr>
