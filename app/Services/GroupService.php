@@ -27,7 +27,6 @@ class GroupService{
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
             $group = $this->repository->create($data);
-
             return [
                 'success'  => 'true',
                 'messages' => "Grupo cadastrado",
@@ -57,7 +56,7 @@ class GroupService{
         }
         catch(Exception $e){
             
-            switch(get_class($e)){
+            switch(get_class($e)){ 
                 
                 case QueryException::class     : return ['success' => false, 'messages' => $e->getMessage()];
                 case Exception::class          : return ['success' => false, 'messages' => $e->getMessage()];
@@ -88,14 +87,12 @@ class GroupService{
         }
     }
 
-    public function userstore($group_id , $data){
+    public function userstore($group_id , $user_id){
 
 
         try{
             
             $group = $this->repository->find($group_id);
-            $user_id = $data['user_id'];
-
             $group->users()->attach($user_id);
 
             return [

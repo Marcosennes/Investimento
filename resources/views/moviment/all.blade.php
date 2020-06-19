@@ -1,8 +1,8 @@
 @extends('templates.master')
 
 @section('conteudo-view')
-<div class="col-md-12">
-<form method="post" action="{{ route('moviment.search') }}">
+<div class="offset-lg-2 col-12 col-md-8 d-flex flex-column" style="background-color: white;">
+    <form method="post" action="{{ route('moviment.search') }}">
     {!! csrf_field() !!}
         <h3>Filtro:</h3>
         <label for="products">
@@ -13,7 +13,7 @@
         </label>
         <button type="submit" style="width: 226px;" class="btn btn-1">Filtrar</button>
     </form>
-    <table class="table">
+    <table class="table" style="background-color: white">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">Dia</th>        
@@ -32,7 +32,7 @@
                     <th scope="row">    {{ $moviment->created_at->format("H:i")}}                 </th>
                     <td>                {{ $moviment->type == 1 ? "Aplicação" : "Resgate"}}               </td>
                     <td>                {{ $moviment->product_name}}               </td>
-                    <td>                {{ $moviment->group->name}}               </td>
+                    <td>                {{ $moviment->group_name}}               </td>
                     <td>             R$ {{ $moviment->value }}        </td>
     
                 </tr>

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entities;
+use App\Entities\Group;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,7 @@ use Prettus\Repository\Traits\TransformableTrait;
 class Moviment extends Model implements Transformable
 {
     use TransformableTrait;
-
+ 
     /**
      * The attributes that are mass assignable.
      *
@@ -84,7 +85,6 @@ class Moviment extends Model implements Transformable
     public function listar()
     {
         $id_user = Auth::id();
-
         $moviment_list = $this
                             ->where('user_id', '=', $id_user)
                             ->select('*')
@@ -92,12 +92,18 @@ class Moviment extends Model implements Transformable
 
         foreach($moviment_list as $moviment)
         {
-            $produto = Product::withTrashed()
-                            ->where('id', '=', $moviment->attributes['product_id'])
-                            ->select('name')
-                            ->get();
+            $produto    = Product::withTrashed()
+                                    ->where('id', '=', $moviment->attributes['product_id'])
+                                    ->select('name')
+                                    ->get();
 
-            $moviment->attributes['product_name'] = $produto[0]->attributes['name'];
+            $grupo      = Group::withTrashed()
+                                    ->where('id', '=', $moviment->attributes['group_id'])
+                                    ->select('name')
+                                    ->get();
+                            
+            $moviment->attributes['product_name']   = $produto[0]->attributes['name'];
+            $moviment->attributes['group_name']     = $grupo[0]->attributes['name'];
         }
 
         return $moviment_list;

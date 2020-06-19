@@ -2,41 +2,19 @@
 
 @section('conteudo-view')
 
-<div class="col-md-12">
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">#</th>        
-                <th scope="col">Nome da instituição</th>        
-                <th scope="col">Opções</th>        
-            </tr>        
-        </thead>
-        <tbody>
-            @foreach ($instituitions as $inst)
-                <tr>
-                    <th scope="row">    {{ $inst->id}}          </th>
-                    <td>                {{ $inst->name}}        </td>
-                    <td> 
-                        <form method="POST" accept-charset="UTF-8" action=" {{ route('instituition.destroy', ['id'=> $inst->id]) }} ">
-                            {!! csrf_field() !!}
-                            <input name="_method" type="hidden" value="DELETE">
-                            @if( $user_permission == "app.admin" )
-                                <div id="edit" style="display: show;">
-                                    <button class="btn btn-1" type="submit">Remove</button>
-                                </div>    
-                            @endif
-                        </form>
-                    <a href="{{ route('instituition.product.index', $inst->id) }}">produtos</a>
-                    @if( $user_permission == "app.admin" )
-                        <div id="edit" style="display: show;">
-                            <a href="{{ route('instituition.edit',  $inst->id) }}">editar</a>
-                        </div>
-                    @endif    
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
+@if( $user_permission == "app.admin" )
+    <div class="col-12 col-lg-2 row d-flex flex-colum n pb-3" id="lixeira">
+        @if($type_page == "index")
+            <a href="{{ route('instituition.trash') }}" class="btn btn-1" type="submit">Lixeira</a>
+        @endif
+        @if($type_page == "trash")
+            <a href="{{ route('instituition.index') }}" class="btn btn-1" type="submit">Grupos</a>
+        @endif
+    </div>
+@endif
+
+@include('instituitions.list', [    'instituition_list' => $instituitions, 
+                                    'user_permission'   => $user_permission,
+                                    'type_page'         => $type_page])
 
 @endsection

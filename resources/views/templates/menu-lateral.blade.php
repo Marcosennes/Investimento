@@ -4,7 +4,7 @@
 <nav id="principal">
     <div class="sidebar-header">
     <?php
-    echo('Olá, ' . Auth::user()->name);
+        echo('<div><h3>Olá, ' . Auth::user()->name) . '</h3></div>';
     ?>
     <h3></h3>
     </div>

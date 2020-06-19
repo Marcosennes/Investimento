@@ -21,7 +21,7 @@
     @yield('css-view')
     
 </head>
-<body>
+<body style="background-color: #51dca6;">
     @include('templates.menu-lateral')
   
     <section class="sectionmain" id="view-conteudo">

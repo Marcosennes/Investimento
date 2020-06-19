@@ -51,4 +51,5 @@ class Product extends Model implements Transformable
         return $applications - $outflows;  
     }
 
+
 }

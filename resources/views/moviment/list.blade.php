@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table" style="background-color: white">
     <thead class="thead-dark">
         <tr>
             <th scope="col">Produto</th>        
@@ -10,7 +10,7 @@
         @foreach ($product_list as $product)
             <tr>
                 <th scope="row">    {{ $product->name}}                 </th>
-                <td>                {{ $product->instituition->name}}               </td>
+                <td>                {{ $product->instituition_name}}               </td>
                 <td>             R$ {{ $product->valueFromUser(Auth::user()) }}        </td>
 
             </tr>

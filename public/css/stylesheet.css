@@ -217,6 +217,11 @@ section#conteudo-view form button[type="submit"]{
     background-color: rgb(190, 190, 18);
 }
 
+.btn-black{
+    color: white;
+    background-color: #444444;
+}
+
 .wrapper {
     display: flex;
     width: 100%;

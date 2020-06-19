@@ -1,5 +1,5 @@
-<div class="col-md-12">
-    <table class="table">
+<div class="col-md-12" >
+    <table class="table" style="background-color: white">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>        
@@ -10,9 +10,7 @@
                 <th scope="col">E-mail</th>        
                 <th scope="col">Status</th>        
                 <th scope="col">Permissão</th>
-                @if( $user_permission == "app.admin" )
-                    <th scope="col" style="text-align: center">Opções</th>
-                @endif
+                <th scope="col" style="text-align: center">Opções</th>
             </tr>        
         </thead>
         <tbody>
@@ -27,9 +25,13 @@
                     <td> {{ $user->status}}     </td>
                     <td> {{ $user->permission}} </td>
                     <td> 
-                        @if( $user_permission == "app.admin" )
-                            <div class="row">
-                                    <a class="btn btn-primary" href=" {{ route('user.edit', $user->id) }} ">Editar</a>
+                        <div class="row">
+
+                            @if($user_id == $user->id)
+                                <a class="btn btn-primary" href=" {{ route('user.edit', $user->id) }} ">Editar</a>
+                            @endif
+
+                            @if( $user_permission == "app.admin" )
                                 @if($user->permission == "app.user")
                                     <div id="tornar_admin" style=" margin-left: 5px;">
                                         <a class="btn btn-yellow" href=" {{ route('user.tornarAdmin', ['id' => $user->id]) }} ">Tornar Admin</a>
@@ -40,6 +42,7 @@
                                         <a class="btn btn-yellow" href=" {{ route('user.tornarAdmin', ['id' => $user->id]) }} ">Retirar Admin</a>
                                     </div>      
                                 @endif
+                                <!--
                                 <div style=" margin-left: 5px;">
                                     <form method="POST" accept-charset="UTF-8" action=" {{ route('user.destroy', ['id'=> $user->id]) }} ">
                                         {!! csrf_field() !!}
@@ -49,8 +52,9 @@
                                             </div>
                                     </form>
                                 </div>
-                            </div>
-                        @endif
+                                -->
+                            @endif
+                        </div>
                     </td>
                 </tr>
             @endforeach

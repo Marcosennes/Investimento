@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Moviment;
+use App\Entities\Instituition;
 use App\Entities\Product;
+use App\Entities\Group;
 use App\Entities\UserGroups;
 use Illuminate\Http\Request;
 
@@ -48,8 +50,20 @@ class MovimentsController extends Controller
 
     public function index()
     {
+        $product_list = Product::all();
+        
+        foreach($product_list as $product)
+        {
+            $instituition_name    = Instituition::withTrashed()
+            ->where('id', '=', $product['instituition_id'])
+            ->select('name')
+            ->get();
+
+            $product['instituition_name']   = $instituition_name[0]->name;
+        }
+
         return view('moviment.index', [
-            'product_list' => Product::all(),
+            'product_list' => $product_list,
         ]);
     }
 
@@ -100,13 +114,31 @@ class MovimentsController extends Controller
         
         $GLOBALS['id_user'] = $id_user;
 
-        $user_group_list = UserGroups::join('groups', function($join)
+        /*
+         * $user_group_list = UserGroups::join('groups', function($join)
+         *                                {
+         *                                      $join->on('user_groups.group_id', '=', 'groups.id')
+         *                                           ->where('user_groups.user_id', '=', $GLOBALS['id_user']);
+         *                                 })
+         *                                 ->select('groups.id', 'groups.name')
+         *                                 ->get();
+         */
+
+        /*
+         * A busca deve ser feita com Group primeiro. O join une o primeiro elemento com a tabela 
+         * no SQL diretamente sem passar no filtro do Trashed do Laravel.
+         * A segunda condição do join sempre é uma tabela direto do SQL. Nesse caso Group tinha que 
+         * passar pelo filtro. Dessa forma os grupos excluídos não serão mostrados no investir
+         */
+
+        $user_group_list = Group::join('user_groups', function($join)
                             {
                                 $join->on('user_groups.group_id', '=', 'groups.id')
                                     ->where('user_groups.user_id', '=', $GLOBALS['id_user']);
                             })
                             ->select('groups.id', 'groups.name')
                             ->get();
+
 
         /*
          * //Forma para acessar os dados que vieram da lista $user_group_list
