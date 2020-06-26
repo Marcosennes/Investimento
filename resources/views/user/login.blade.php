@@ -47,9 +47,9 @@
             @if(session('none_user'))
                 <h3 style = "color: red;">{{ session('none_user')['messages'] }}</h3>
             @endif
-            <h3 style="font-size: 19px; margin-top: 20px;">
+            <h3 class="mt-2" style="font-size: 19px;">
                 Ainda não é registrado?
-                <button class="btn btn-primary botaoRegister" id="register_button">Register</button>
+                <button class="btn btn-login-register mt-2 mr-1" id="register_button">Register</button>
             </h3>    
         </div>
         <div id="register" style="display: none;">
@@ -104,7 +104,7 @@
                 </div>
             </form>
             
-            <button class="btn-1 btn-primary" id="login_button">Login</button>
+            <button class="btn btn-login-register" id="login_button">Login</button>
         </div>
 
     </section>  

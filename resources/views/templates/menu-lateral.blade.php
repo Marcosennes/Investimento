@@ -70,7 +70,7 @@
     <ul class="lista" style="margin-top: 200px;">
         <li class="lista" style="">
             <a class="alogout" href="{{ route('logout') }}">
-                <i class="fas fa-door-open ilogout"></i>
+                <i class="imenu fas fa-door-open ilogout"></i>
                 <h3 class="h3logout" >Sair</h3>
             </a>
         </li>

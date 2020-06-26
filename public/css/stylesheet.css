@@ -93,18 +93,17 @@ section#conteudo-view form button[type="submit"]{
     float: right;  /* Alinhamento */
 }
 
-.botaoRegister{
-    width: 100%;
-    height: 40px;
-    border-radius: 20px;
-    border: 2px solid #444444;
+.btn-login-register{
+
     background: #444444;
-    /* background: #00ff9c; */
     text-align: center;
-    font: .8em 'Fredoka One', cursive; 
+    font: 1em 'Fredoka One', cursive; 
     color: #f9f9f9;
-    width: 30%;
+    width: 40%;
     float: right;  /* Alinhamento */
+    border-radius: 20px;
+
+    
 }
 
 /*

@@ -23,7 +23,7 @@
                         <input type="text" class="form-control" name="value" placeholder="R$">
                     </label>
                     <br>
-                    <button class="btn btn-black mt-2 mb-2" style="float: right; margin-right: 125px;" type="submit">Resgatar</button>    
+                    <button class="btn btn-black mt-2 mb-2"type="submit">Resgatar</button>    
                 </div>
             </form> 
         </div>
