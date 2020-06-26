@@ -3,29 +3,35 @@
 @section('conteudo-view')
 
 @if($user_permission == 'app.admin')
-<div class="col-md-6">
-    <h3>Cadastrar novo produto</h3>
-    <form method="post" action=" {{ route('instituition.product.store', ['id' => $instituition->id]) }} ">
-        {!! csrf_field() !!}
-        <label for="product-name">
-            <input type="text" class="form-control" name="name" placeholder="Nome do produto">
-        </label>
-        <label for="description">
-            <input type="text" class="form-control" name="description" placeholder="Descrição do produto">
-        </label>
-        <label for="indexador">
-            <input type="text" class="form-control" name="index" placeholder="index">
-        </label>
-        <label for="taxa-de-juros">
-            <input type="text" class="form-control" name="interest_rate" placeholder="taxa de juros (%)">
-        </label>
-        <br>
-        <button class="btn btn-1" type="submit">Cadastrar</button>
-    </form> 
+<div class="offset-lg-2 col-12 col-lg-8" style="background-color: white">
+    <div class="row d-flex flex-column">
+        <form method="post" action=" {{ route('instituition.product.store', ['id' => $instituition->id]) }} ">
+            {!! csrf_field() !!}
+            <div class="ml-3 mr-3 d-flex flex-column">
+                <div class="mt-3">
+                    <h2 style="color: black">Novo Produto</h2>
+                </div>
+                <label for="product-name">
+                    <input type="text" class="form-control" name="name" placeholder="Nome do produto">
+                </label>
+                <label for="description">
+                    <input type="text" class="form-control" name="description" placeholder="Descrição do produto">
+                </label>
+                <label for="indexador">
+                    <input type="text" class="form-control" name="index" placeholder="index">
+                </label>
+                <label for="taxa-de-juros">
+                    <input type="text" class="form-control" name="interest_rate" placeholder="taxa de juros (%)">
+                </label>
+                <br>
+                <button class="btn btn-black mb-2" type="submit">Cadastrar</button>
+            </div>
+        </form> 
+    </div>
 </div>
 @endif
-<div class="col-md-12">
-    <table class="table">
+<div class="col-md-12 mt-4">
+    <table class="table" style="background-color: white">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>        

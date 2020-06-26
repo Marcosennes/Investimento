@@ -42,12 +42,6 @@ class UsersController extends Controller
 
         /* $usuario = $request['success'] ? $request['data'] : null; */ 
 
-        session()->flash('success', 
-        [
-            'success'  => $request['success'],
-            'messages' => $request['messages']
-        ]);
-
         return redirect()->route('user.index');
     }
 

@@ -4,26 +4,16 @@
 
     @if(session('success'))
         <h3>{{ session('success')['messages'] }}</h3>
-    @else
-        <h3>Não houve retorno</h3>
     @endif
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Investindo</title>
-</head>
 <body>
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-12 col-sm-12 col-md-12 col-lg-6" style="background-color: aqua">
-                <form method= "post" action=" {{ route('user.store') }} ">
-                    {!! csrf_field() !!}
-                    <h3 style="color: white">Cadastrar novo usuário</h3>
-                    <div class="container">
-                        <div class="offset-2 col-8">
+    <div class="offset-lg-4 col-12 col-lg-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-12" style="background-color: white">
+                    <form method= "post" action=" {{ route('user.store') }} ">
+                        {!! csrf_field() !!}
+                        <h3 style="color: black">Cadastrar novo usuário</h3>
+                        <div class="container">
                             <div class="row d-flex flex-column">
                                 <label for="cpfInputEmail1">
                                     <input  type="text" class="form-control" style="width: 100%" name="cpf" aria-describedby="cpfHelp" placeholder="CPF">
@@ -48,32 +38,28 @@
                                 <label for="exampleInputPassword2">
                                     <input type="password" class="form-control" name="password" placeholder="Password">
                                 </label>
-                                <button type="submit" class="btn btn-1" style="width: 100%">Cadastrar</button>
+                                <button type="submit" class="btn btn-black mb-5" style="width: 100%">Cadastrar</button>
                             </div>
-                        </div>
-                    </div>    
-                </form>
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-6" style="background-color: brown">
-                <h3 style="color: white">Cadastrar nova instituição</h3>
-                <div class="container">
-                    <div class="offset-2 col-8">
+                        </div>    
+                    </form>
+                </div>
+                <div class="col-12" style="background-color: white">
+                    <h3 style="color: black">Cadastrar nova instituição</h3>
+                    <div class="container">
                         <form method="post" action=" {{ route('instituition.store') }} ">
                             {!! csrf_field() !!}
-                                <div class="row d-flex flex-column">
-                                    <label for="registerInstituition">
-                                        <input type="text" class="form-control" name="name" placeholder="Nome da Instituição">
-                                    </label>
-                                    <button class="btn btn-1" style="width: 100%" type="submit">Cadastrar</button>
-                                </div>
-                            </form>    
+                            <div class="row d-flex flex-column">
+                                <label for="registerInstituition">
+                                    <input type="text" class="form-control" name="name" placeholder="Nome da Instituição">
+                                </label>
+                                <button class="btn btn-black mb-5" style="width: 100%" type="submit">Cadastrar</button>
+                            </div>
+                        </form>    
                     </div>
                 </div>
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-6" style="background-color: blueviolet">
-                <h3 style="color: white">Cadastrar novo grupo</h3>
-                <div class="container">
-                    <div class="offset-2 col-8">
+                <div class="col-12" style="background-color: white">
+                    <h3 style="color: black">Cadastrar novo grupo</h3>
+                    <div class="container">
                         <form method="post" action=" {{ route('group.store') }} ">
                             {!! csrf_field() !!}
                             <div class="row d-flex flex-column">
@@ -82,12 +68,13 @@
                                 </label>
                             </div>
                             <div class="row d-flex flex-column">
-                                @include('templates.formulario.select', ['label' => "Responsável",     'select' => 'user_id',         'data' => $user_list,         'name_select' => 'user_id',     'attributes' => ['placeholder' => "User"]])
-                                <button class="btn btn-1" style="width: 100%" type="submit">Cadastrar</button>
+                                @include('templates.formulario.select', ['label' => "Responsável", 'select' => 'user_id', 'data' => $user_list,         'name_select' => 'user_id',     'attributes' => ['placeholder' => "User"]])
+                                <button class="btn btn-black mb-2" style="width: 100%" type="submit">Cadastrar</button>
                             </div>
                         </form>     
                     </div>
                 </div>
+    
             </div>
         </div>
     </div>

@@ -238,3 +238,9 @@ section#conteudo-view form button[type="submit"]{
     color: #fff;
     transition: all 0.3s;
 }
+
+.preencher{
+    width: 100%;
+    height: inherit;
+    overflow: visible;
+}

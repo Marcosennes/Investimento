@@ -4,7 +4,7 @@
 <div class="offset-lg-2 col-12 col-md-8 d-flex flex-column" style="background-color: white;">
     <form method="post" action="{{ route('moviment.search') }}">
     {!! csrf_field() !!}
-        <h3>Filtro:</h3>
+        <h3 class="mt-3">Filtro:</h3>
         <label for="products">
             <input  type="text" class="form-control" name="product_name" aria-describedby="product" placeholder="produto">
         </label>
@@ -22,7 +22,6 @@
                 <th scope="col">Produto</th>        
                 <th scope="col">Grupo</th>        
                 <th scope="col">Valor investido</th>    
-                <th scope="col"></th>    
             </tr>        
         </thead>
         <tbody>

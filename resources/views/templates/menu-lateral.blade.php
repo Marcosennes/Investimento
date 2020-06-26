@@ -2,12 +2,13 @@
     use Illuminate\Support\Facades\Auth;
 ?>        
 <nav id="principal">
+    <!--
     <div class="sidebar-header">
     <?php
         echo('<div><h3>Olá, ' . Auth::user()->name) . '</h3></div>';
     ?>
-    <h3></h3>
     </div>
+    -->
     <ul class="lista">
         <li class="lista">
             <a id="a1" class="amenu" href="  {{ route('user.index') }}  ">
@@ -35,7 +36,7 @@
         <div id="cadastrar">
             <li class="lista">
                 <a id="a1" class="amenu" href=" {{ route('user.dashboard') }} ">
-                    <i class="imenu fas fa-user-plus"></i>
+                    <i class="imenu fas fa-plus"></i>
                     <h3 class="h3menu">Cadastrar</h3>
                 </a>
             </li>
@@ -43,13 +44,13 @@
         @endif
         <li class="lista">
             <a id="a1" class="amenu" href=" {{ route('moviment.application') }} ">
-                <i class="imenu fas fa-coins"></i>
+                <i class="imenu fa fa-mail-forward"></i>
                 <h3 class="h3menu">Investir</h3>
             </a>
         </li>
         <li class="lista">
             <a id="a1" class="amenu" href=" {{ route('moviment.getback') }} ">
-                <i class="imenu fas fa-coins"></i>
+                <i class="imenu fa fa-mail-reply"></i>
                 <h3 class="h3menu">Resgatar</h3>
             </a>
         </li>
@@ -66,7 +67,7 @@
             </a>
         </li>
     </ul>
-    <ul class="lista" style="margin-top: 60px;">
+    <ul class="lista" style="margin-top: 200px;">
         <li class="lista" style="">
             <a class="alogout" href="{{ route('logout') }}">
                 <i class="fas fa-door-open ilogout"></i>
