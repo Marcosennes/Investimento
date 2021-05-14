@@ -11,7 +11,7 @@
                 <th scope="col">Status</th>        
                 <th scope="col">Permissão</th>
                 <th scope="col" style="text-align: center">Opções</th>
-            </tr>        
+            </tr>
         </thead>
         <tbody>
             @foreach ($user_list as $user)

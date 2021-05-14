@@ -3,8 +3,6 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Support\Facades\Auth;
-
-
 use Closure;
 
 class CheckLogin
@@ -17,8 +15,7 @@ class CheckLogin
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {
-
+    {   
         if(!Auth::check())
         {
             return redirect()->route('login.loginPage');
