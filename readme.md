@@ -1,40 +1,34 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+# Sobre o Sistema
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+O sistema foi desenvolvido na intenção de aprender a desenvolver um sistema web utilizando PHP com o Framework Laravel. Foi utilizado também HTML, CSS,  Javascript com Jquery e o Blade para construção das views da aplicação.
 
-## About Laravel
+Neste sistema é possível executar as seguinter ações
++ Registrar usuários
++ Realizar login dos usuários
++ Criar, visualizar, editar e excluir Usuários(Cadastro e Registro), Grupos, Instituições e Produtos
++ O usuário pode investir em produtos através de Grupos
++ O usuário pode retirar seu investimento no Produto
++ Registrar um usuário como administrador
++ Um usuário Administrador pode transformar outros usuários em Administradores também.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+# Imagens do Sistema
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tela inicial
+<div align="center">
+    <img src="https://user-images.githubusercontent.com/43481166/196781359-1643a0c2-5d18-4b2e-87b6-8c7427ec04e5.png" alt="" width="850px;">
+</div>
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
+## Cadastro de uruários, Instituições e Grupos
+<div align="center">
+    <img src="https://user-images.githubusercontent.com/43481166/196781367-202e00f1-99da-468e-af51-5d0749b0aeef.png" alt="" width="850px;">
+</div>
 
-## Learning Laravel
+## Listagem de Grupos
+<div align="center">
+    <img src="https://user-images.githubusercontent.com/43481166/196781371-2b563e53-980f-4726-acff-5a80e56daab1.png" alt="" width="850px;">
+</div>
 
-Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
-
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+## Investimento do usuário
+<div align="center">
+    <img src="https://user-images.githubusercontent.com/43481166/196781375-335e16ad-9af3-4d91-8429-721d591e6962.png" alt="" width="850px;">
+</div>
